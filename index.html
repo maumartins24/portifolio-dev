@@ -74,8 +74,8 @@
   }
   .hero-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 2.5rem;
     align-items: center;
   }
   .hero-tag {
@@ -200,11 +200,13 @@
     white-space: nowrap;
   }
   .card-stat-label {
-    font-size: 10px;
+    font-size: 9px;
     color: var(--muted);
     margin-top: 2px;
-    letter-spacing: 0.03em;
-    white-space: nowrap;
+    letter-spacing: 0.02em;
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.3;
   }
   .card-tech-row {
     display: flex; flex-wrap: wrap; gap: 6px;
@@ -527,7 +529,7 @@
       <div class="hero-card">
         <div class="avatar-ring">MM</div>
         <div class="card-name">Mauricio Martins</div>
-        <div class="card-sub">São Paulo, SP · Fullstack Dev</div>
+        <div class="card-sub">São Paulo, SP<br><span style="color:var(--accent);font-size:11px;">Fullstack Dev</span></div>
         <div class="card-stat-row">
           <div class="card-stat">
             <div class="card-stat-num">2+</div>

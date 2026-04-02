@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mauricio Martins — Dev Fullstack</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --card: #16161f;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.14);
+    --text: #f0f0f5;
+    --muted: #6b6b7e;
+    --accent: #7c6af7;
+    --accent2: #3dd6b0;
+    --accent3: #f7a06a;
+    --tag-bg: rgba(124,106,247,0.12);
+    --tag-color: #a99eff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem;
+    height: 60px;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* SECTIONS */
+  section { padding: 5rem 0; }
+  .container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 60px;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--accent2);
+    border: 1px solid rgba(61,214,176,0.25);
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+  }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); }
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+  }
+  .hero-name span { color: var(--accent); }
+  .hero-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+  }
+  .hero-desc {
+    font-size: 15px;
+    color: #9898a8;
+    line-height: 1.7;
+    max-width: 400px;
+    margin-bottom: 2rem;
+  }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 22px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover { background: #6a58e8; transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border-hover);
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* HERO VISUAL CARD */
+  .hero-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute; top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    background: radial-gradient(circle, rgba(124,106,247,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .avatar-ring {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--accent);
+    background: rgba(124,106,247,0.08);
+  }
+  .card-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .card-sub {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 1.5rem;
+  }
+  .card-stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+  }
+  .card-stat {
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+    padding: 12px 10px;
+    text-align: center;
+  }
+  .card-stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent2);
+  }
+  .card-stat-label {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 2px;
+    letter-spacing: 0.04em;
+  }
+  .card-tech-row {
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .tech-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: var(--tag-bg);
+    color: var(--tag-color);
+    border: 1px solid rgba(124,106,247,0.2);
+  }
+
+  /* SECTION HEADINGS */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+  }
+  .section-desc {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 3rem;
+  }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 0 20px;
+    padding-bottom: 2.5rem;
+    position: relative;
+  }
+  .exp-dot-col { display: flex; flex-direction: column; align-items: center; }
+  .exp-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 2px var(--accent);
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+  .exp-dot.accent2 { background: var(--accent2); box-shadow: 0 0 0 2px var(--accent2); }
+  .exp-line {
+    width: 1px;
+    flex: 1;
+    background: var(--border);
+    margin-top: 6px;
+  }
+  .exp-item:last-child .exp-line { display: none; }
+  .exp-content { padding-bottom: 0; }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; }
+  .exp-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+  }
+  .exp-company {
+    font-size: 14px;
+    color: var(--accent);
+    margin-bottom: 2px;
+  }
+  .exp-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+    background: rgba(255,255,255,0.04);
+    padding: 3px 10px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+  }
+  .exp-date.current { color: var(--accent2); border-color: rgba(61,214,176,0.3); }
+  .exp-desc {
+    font-size: 14px;
+    color: #8888a0;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .exp-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .exp-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: rgba(255,255,255,0.04);
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+  }
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .skill-icon { font-size: 22px; margin-bottom: 10px; }
+  .skill-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  .skill-level {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .skill-bar-track {
+    height: 3px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .skill-bar-fill {
+    height: 100%;
+    border-radius: 10px;
+    background: var(--accent);
+  }
+  .skill-bar-fill.g { background: var(--accent2); }
+  .skill-bar-fill.o { background: var(--accent3); }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .project-card.featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: start;
+  }
+  .project-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 100px;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+  .badge-purple { background: rgba(124,106,247,0.15); color: var(--tag-color); }
+  .badge-green { background: rgba(61,214,176,0.12); color: var(--accent2); }
+  .badge-orange { background: rgba(247,160,106,0.12); color: var(--accent3); }
+  .project-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .project-desc { font-size: 13px; color: #8888a0; line-height: 1.6; margin-bottom: 14px; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 6px; }
+  .project-chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 100px;
+    background: rgba(255,255,255,0.04);
+    color: var(--muted);
+  }
+  .project-arrow {
+    font-size: 18px;
+    color: var(--muted);
+    transition: color 0.2s, transform 0.2s;
+    line-height: 1;
+  }
+  .project-card:hover .project-arrow { color: var(--accent); transform: translate(2px,-2px); }
+
+  /* CONTACT */
+  #contato { background: var(--surface); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+  .contact-headline {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: 1rem;
+  }
+  .contact-headline span { color: var(--accent); }
+  .contact-sub { font-size: 15px; color: var(--muted); }
+  .contact-links { display: flex; flex-direction: column; gap: 10px; }
+  .contact-link {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.2s, transform 0.2s;
+    font-size: 14px;
+  }
+  .contact-link:hover { border-color: var(--accent); transform: translateX(4px); }
+  .contact-link-icon {
+    width: 36px; height: 36px;
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .icon-purple { background: rgba(124,106,247,0.15); }
+  .icon-blue { background: rgba(56,130,221,0.15); }
+  .icon-green { background: rgba(61,214,176,0.15); }
+  .cl-label { color: var(--muted); font-size: 11px; font-family: 'DM Mono', monospace; }
+  .cl-value { font-size: 14px; font-weight: 500; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  footer span { color: var(--accent); }
+
+  /* BG GLOW */
+  .bg-glow {
+    position: fixed; pointer-events: none; z-index: 0;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.15;
+  }
+  .glow1 { width: 600px; height: 600px; background: var(--accent); top: -200px; left: -200px; }
+  .glow2 { width: 400px; height: 400px; background: var(--accent2); bottom: -100px; right: -100px; }
+
+  .relative { position: relative; z-index: 1; }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  @media (max-width: 700px) {
+    .hero-grid, .contact-grid, .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: auto; display: block; }
+    .hero-card { display: none; }
+    nav .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-glow glow1"></div>
+<div class="bg-glow glow2"></div>
+
+<nav>
+  <span class="nav-logo">maumartins.dev</span>
+  <div class="nav-links">
+    <a href="#sobre">sobre</a>
+    <a href="#experiencia">experiência</a>
+    <a href="#skills">skills</a>
+    <a href="#projetos">projetos</a>
+    <a href="#contato">contato</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container relative">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-tag">disponível para novas oportunidades</div>
+        <h1 class="hero-name">Mauricio<br><span>Martins</span></h1>
+        <p class="hero-role">// Fullstack Developer</p>
+        <p class="hero-desc">Desenvolvedor Fullstack com experiência real em produção — de APIs em NestJS a automações com N8N, de extensões Chrome a dashboards de dados.</p>
+        <div class="hero-btns">
+          <a href="#contato" class="btn btn-primary">Entre em contato ↗</a>
+          <a href="https://github.com/maumartins24" target="_blank" class="btn btn-outline">GitHub →</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="avatar-ring">MM</div>
+        <div class="card-name">Mauricio Martins</div>
+        <div class="card-sub">São Paulo, SP · Fullstack Dev</div>
+        <div class="card-stat-row">
+          <div class="card-stat">
+            <div class="card-stat-num">2+</div>
+            <div class="card-stat-label">anos XP</div>
+          </div>
+          <div class="card-stat">
+            <div class="card-stat-num">29</div>
+            <div class="card-stat-label">repos</div>
+          </div>
+          <div class="card-stat">
+            <div class="card-stat-num">B2</div>
+            <div class="card-stat-label">Inglês</div>
+          </div>
+        </div>
+        <div class="card-tech-row">
+          <span class="tech-pill">Node.js</span>
+          <span class="tech-pill">NestJS</span>
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">Vue</span>
+          <span class="tech-pill">Docker</span>
+          <span class="tech-pill">PostgreSQL</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EXPERIÊNCIA -->
+<section id="experiencia">
+  <div class="container relative">
+    <div class="section-label">experiência</div>
+    <h2 class="section-title">Trajetória</h2>
+    <p class="section-desc">De estagiário a dev full-time em menos de um ano.</p>
+
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-dot-col">
+          <div class="exp-dot accent2"></div>
+          <div class="exp-line"></div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Desenvolvedor Junior PJ</div>
+              <div class="exp-company">MelloAIT</div>
+            </div>
+            <span class="exp-date current">abr/2025 — atual</span>
+          </div>
+          <p class="exp-desc">Atuação em projetos Fullstack com foco em crescimento técnico. Desenvolvimento de interfaces com Vue.js e Figma, back-end com NestJS e Prisma ORM para modelagem de dados.</p>
+          <div class="exp-tags">
+            <span class="exp-tag">NestJS</span>
+            <span class="exp-tag">Vue.js</span>
+            <span class="exp-tag">Prisma</span>
+            <span class="exp-tag">Node.js</span>
+            <span class="exp-tag">Figma</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot-col">
+          <div class="exp-dot"></div>
+          <div class="exp-line"></div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Desenvolvedor Junior PJ</div>
+              <div class="exp-company">Ativa.AI</div>
+            </div>
+            <span class="exp-date current">ago/2024 — atual</span>
+          </div>
+          <p class="exp-desc">Tratativa direta com CEO e COO. Automação de relatórios manuais com APIs em Python/Node, pipelines de dados via N8N, RabbitMQ e NIFI Flow. Criação de extensões Chrome para produtividade, manutenção de servidores, domínios e proxy reverso.</p>
+          <div class="exp-tags">
+            <span class="exp-tag">Python</span>
+            <span class="exp-tag">NestJS</span>
+            <span class="exp-tag">N8N</span>
+            <span class="exp-tag">RabbitMQ</span>
+            <span class="exp-tag">NIFI Flow</span>
+            <span class="exp-tag">Looker Studio</span>
+            <span class="exp-tag">Chrome Extensions</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot-col">
+          <div class="exp-dot" style="background:var(--accent3);box-shadow:0 0 0 2px var(--accent3);"></div>
+          <div class="exp-line"></div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Estagiário — Desenvolvimento de Sistemas</div>
+              <div class="exp-company">Ativa.AI</div>
+            </div>
+            <span class="exp-date">mar/2024 — ago/2024</span>
+          </div>
+          <p class="exp-desc">Manutenção de relatórios em Google Sheets, criação de APIs REST, banco de dados PostgreSQL e MySQL, versionamento com Git.</p>
+          <div class="exp-tags">
+            <span class="exp-tag">Python</span>
+            <span class="exp-tag">Node.js</span>
+            <span class="exp-tag">PostgreSQL</span>
+            <span class="exp-tag">MySQL</span>
+            <span class="exp-tag">Git</span>
+            <span class="exp-tag">Google Sheets API</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot-col">
+          <div class="exp-dot" style="background:var(--muted);box-shadow:0 0 0 2px var(--muted);"></div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Análise e Desenvolvimento de Sistemas</div>
+              <div class="exp-company">FIT — Impacta de Tecnologia</div>
+            </div>
+            <span class="exp-date">fev/2023 — jul/2025</span>
+          </div>
+          <p class="exp-desc">Formado. Base sólida em engenharia de software, estrutura de dados, banco de dados relacional e desenvolvimento web.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container relative">
+    <div class="section-label">stack</div>
+    <h2 class="section-title">Tecnologias</h2>
+    <p class="section-desc">Do back-end à automação, do banco de dados ao browser.</p>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">🟢</div>
+        <div class="skill-name">Node.js</div>
+        <div class="skill-level">Back-end runtime</div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🔷</div>
+        <div class="skill-name">NestJS</div>
+        <div class="skill-level">Framework principal</div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🐍</div>
+        <div class="skill-name">Python</div>
+        <div class="skill-level">Automações & APIs</div>
+        <div class="skill-bar-track"><div class="skill-bar-fill g" style="width:80%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">💚</div>
+        <div class="skill-name">Vue.js</div>
+        <div class="skill-level">Front-end</div>
+        <div class="skill-bar-track"><div class="skill-bar-fill g" style="width:70%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🐘</div>
+        <div class="skill-name">PostgreSQL</div>
+        <div class="skill-level">Banco relacional</div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🐳</div>
+        <div class="skill-name">Docker</div>
+        <div class="skill-level">Containers</div>
+        <div class="skill-bar-track"><div class="skill-bar-fill o" style="width:72%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">⚡</div>
+        <div class="skill-name">N8N / NIFI</div>
+        <div class="skill-level">Automação de dados</div>
+        <div class="skill-bar-track"><div class="skill-bar-fill g" style="width:78%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🔌</div>
+        <div class="skill-name">RabbitMQ</div>
+        <div class="skill-level">Message broker</div>
+        <div class="skill-bar-track"><div class="skill-bar-fill o" style="width:65%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PROJETOS -->
+<section id="projetos">
+  <div class="container relative">
+    <div class="section-label">projetos</div>
+    <h2 class="section-title">Construções</h2>
+    <p class="section-desc">Projetos do GitHub e do trabalho real.</p>
+
+    <div class="projects-grid">
+      <a href="https://github.com/maumartins24/PyCharm-PythonProjects" target="_blank" class="project-card featured">
+        <div>
+          <div class="project-badge badge-green">Python · Pinned</div>
+          <div class="project-name">PyCharm Python Projects</div>
+          <p class="project-desc">Coleção de projetos Python desenvolvidos no PyCharm — scripts utilitários, automações e experimentos de back-end. Repositório pinado no perfil, reflete a consistência em Python.</p>
+          <div class="project-stack">
+            <span class="project-chip">Python</span>
+            <span class="project-chip">Automação</span>
+            <span class="project-chip">Scripts</span>
+          </div>
+        </div>
+        <div class="project-arrow">↗</div>
+      </a>
+
+      <a href="https://portifolio-rust-mu.vercel.app/" target="_blank" class="project-card">
+        <div class="project-badge badge-purple">Fullstack · Deploy</div>
+        <div class="project-name">Portfólio Pessoal</div>
+        <p class="project-desc">Site pessoal deployado na Vercel. Front-end com foco em apresentação profissional.</p>
+        <div class="project-stack">
+          <span class="project-chip">Vercel</span>
+          <span class="project-chip">HTML/CSS/JS</span>
+        </div>
+      </a>
+
+      <div class="project-card">
+        <div class="project-badge badge-orange">Automação · Prod</div>
+        <div class="project-name">APIs de Relatórios</div>
+        <p class="project-desc">Automação de relatórios manuais com APIs REST e integração ao Looker Studio. Usado em produção na Ativa.AI.</p>
+        <div class="project-stack">
+          <span class="project-chip">NestJS</span>
+          <span class="project-chip">Python</span>
+          <span class="project-chip">Looker Studio</span>
+        </div>
+      </div>
+
+      <a href="https://github.com/maumartins24" target="_blank" class="project-card" style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;border-style:dashed;">
+        <div style="font-size:24px;color:var(--muted)">+</div>
+        <div style="font-size:13px;color:var(--muted);text-align:center;">Ver todos os 29 repos<br>no GitHub →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="container relative">
+    <div class="contact-grid">
+      <div>
+        <div class="section-label">contato</div>
+        <h2 class="contact-headline">Vamos <span>construir</span> algo juntos?</h2>
+        <p class="contact-sub">Aberto a oportunidades CLT ou PJ, híbrido ou remoto.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:mauriciob.martins@hotmail.com" class="contact-link">
+          <div class="contact-link-icon icon-purple">✉</div>
+          <div>
+            <div class="cl-label">email</div>
+            <div class="cl-value">mauriciob.martins@hotmail.com</div>
+          </div>
+        </a>
+        <a href="https://linkedin.com/in/mauricio-martins-303596247/" target="_blank" class="contact-link">
+          <div class="contact-link-icon icon-blue">in</div>
+          <div>
+            <div class="cl-label">linkedin</div>
+            <div class="cl-value">mauricio-martins-303596247</div>
+          </div>
+        </a>
+        <a href="https://github.com/maumartins24" target="_blank" class="contact-link">
+          <div class="contact-link-icon icon-green">gh</div>
+          <div>
+            <div class="cl-label">github</div>
+            <div class="cl-value">maumartins24</div>
+          </div>
+        </a>
+        <a href="tel:+5511994246819" class="contact-link">
+          <div class="contact-link-icon icon-purple">📞</div>
+          <div>
+            <div class="cl-label">telefone</div>
+            <div class="cl-value">(11) 99424-6819</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  built by <span>Mauricio Martins</span> · São Paulo, SP · 2025
+</footer>
+
+</body>
+</html>

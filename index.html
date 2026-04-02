@@ -373,6 +373,11 @@
     gap: 1rem;
     align-items: start;
   }
+  .project-company {
+    border-color: rgba(61,214,176,0.3) !important;
+    background: linear-gradient(135deg, #16161f 60%, rgba(61,214,176,0.05) 100%);
+  }
+  .project-company:hover { border-color: var(--accent2) !important; transform: translateY(-3px); }
   .project-badge {
     font-family: 'DM Mono', monospace;
     font-size: 10px;
@@ -725,48 +730,88 @@
   <div class="container relative">
     <div class="section-label">projetos</div>
     <h2 class="section-title">Construções</h2>
-    <p class="section-desc">Projetos do GitHub e do trabalho real.</p>
+    <p class="section-desc">Empresa própria, projetos em produção e repositórios no GitHub.</p>
 
     <div class="projects-grid">
-      <a href="https://github.com/maumartins24/PyCharm-PythonProjects" target="_blank" class="project-card featured">
+
+      <!-- M&T TECNOLOGIA JURÍDICA — destaque total -->
+      <a href="https://mt-tecnologia-juridica.vercel.app/" target="_blank" class="project-card featured project-company">
         <div>
-          <div class="project-badge badge-green">Python · Pinned</div>
-          <div class="project-name">PyCharm Python Projects</div>
-          <p class="project-desc">Coleção de projetos Python desenvolvidos no PyCharm — scripts utilitários, automações e experimentos de back-end. Repositório pinado no perfil, reflete a consistência em Python.</p>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <div style="width:36px;height:36px;border-radius:9px;background:rgba(61,214,176,0.15);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--accent2);flex-shrink:0;">M&T</div>
+            <div>
+              <div class="project-badge badge-green" style="margin-bottom:0;">Empresa própria · Em produção</div>
+            </div>
+          </div>
+          <div class="project-name" style="font-size:19px;">M&T Tecnologia Jurídica</div>
+          <p class="project-desc">Co-fundador e desenvolvedor. Startup focada em landing pages e presença digital para advogados e escritórios de advocacia. Site completo em Vue.js com SSG, SEO técnico, tema claro/escuro, formulários de conversão, integração WhatsApp e deploy na Vercel. Parceria com Maria Eduarda (Direito) para garantir comunicação jurídica precisa.</p>
           <div class="project-stack">
-            <span class="project-chip">Python</span>
-            <span class="project-chip">Automação</span>
-            <span class="project-chip">Scripts</span>
+            <span class="project-chip">Vue.js 3</span>
+            <span class="project-chip">Vite SSG</span>
+            <span class="project-chip">TypeScript</span>
+            <span class="project-chip">SEO</span>
+            <span class="project-chip">Vercel</span>
+            <span class="project-chip">OpenGraph</span>
+            <span class="project-chip">WhatsApp API</span>
           </div>
         </div>
         <div class="project-arrow">↗</div>
       </a>
 
-      <a href="https://portifolio-rust-mu.vercel.app/" target="_blank" class="project-card">
-        <div class="project-badge badge-purple">Fullstack · Deploy</div>
-        <div class="project-name">Portfólio Pessoal</div>
-        <p class="project-desc">Site pessoal deployado na Vercel. Front-end com foco em apresentação profissional.</p>
-        <div class="project-stack">
-          <span class="project-chip">Vercel</span>
-          <span class="project-chip">HTML/CSS/JS</span>
-        </div>
-      </a>
-
+      <!-- APIs de Relatórios -->
       <div class="project-card">
         <div class="project-badge badge-orange">Automação · Prod</div>
         <div class="project-name">APIs de Relatórios</div>
-        <p class="project-desc">Automação de relatórios manuais com APIs REST e integração ao Looker Studio. Usado em produção na Ativa.AI.</p>
+        <p class="project-desc">Automação de relatórios manuais com APIs REST e integração ao Looker Studio. Eliminou horas de trabalho manual na Ativa.AI.</p>
         <div class="project-stack">
           <span class="project-chip">NestJS</span>
           <span class="project-chip">Python</span>
           <span class="project-chip">Looker Studio</span>
+          <span class="project-chip">REST API</span>
         </div>
       </div>
 
+      <!-- Chrome Extensions -->
+      <div class="project-card">
+        <div class="project-badge badge-purple">Chrome · Prod</div>
+        <div class="project-name">Extensões Chrome</div>
+        <p class="project-desc">Extensões de produtividade desenvolvidas para uso interno na Ativa.AI, com foco em automação de tarefas repetitivas do dia a dia da equipe.</p>
+        <div class="project-stack">
+          <span class="project-chip">JavaScript</span>
+          <span class="project-chip">Chrome API</span>
+          <span class="project-chip">Manifest V3</span>
+        </div>
+      </div>
+
+      <!-- PyCharm Python Projects -->
+      <a href="https://github.com/maumartins24/PyCharm-PythonProjects" target="_blank" class="project-card">
+        <div class="project-badge badge-green">Python · GitHub</div>
+        <div class="project-name">PyCharm Python Projects</div>
+        <p class="project-desc">Coleção de scripts, automações e experimentos em Python. Repositório pinado, reflete a evolução contínua na linguagem.</p>
+        <div class="project-stack">
+          <span class="project-chip">Python</span>
+          <span class="project-chip">Scripts</span>
+          <span class="project-chip">Automação</span>
+        </div>
+      </a>
+
+      <!-- Portfólio -->
+      <a href="https://portifolio-rust-mu.vercel.app/" target="_blank" class="project-card">
+        <div class="project-badge badge-purple">Fullstack · Deploy</div>
+        <div class="project-name">Portfólio Pessoal</div>
+        <p class="project-desc">Site pessoal anterior deployado na Vercel. Front-end com foco em apresentação profissional.</p>
+        <div class="project-stack">
+          <span class="project-chip">HTML/CSS/JS</span>
+          <span class="project-chip">Vercel</span>
+        </div>
+      </a>
+
+      <!-- Ver mais -->
       <a href="https://github.com/maumartins24" target="_blank" class="project-card" style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;border-style:dashed;">
         <div style="font-size:24px;color:var(--muted)">+</div>
         <div style="font-size:13px;color:var(--muted);text-align:center;">Ver todos os 29 repos<br>no GitHub →</div>
       </a>
+
     </div>
   </div>
 </section>

@@ -181,27 +181,30 @@
   }
   .card-stat-row {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
     margin-bottom: 1.5rem;
   }
   .card-stat {
-    background: rgba(255,255,255,0.04);
+    background: rgba(255,255,255,0.05);
     border-radius: 10px;
-    padding: 12px 10px;
+    padding: 10px 6px;
     text-align: center;
+    min-width: 0;
   }
   .card-stat-num {
     font-family: 'Syne', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     color: var(--accent2);
+    white-space: nowrap;
   }
   .card-stat-label {
     font-size: 10px;
     color: var(--muted);
     margin-top: 2px;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
   }
   .card-tech-row {
     display: flex; flex-wrap: wrap; gap: 6px;
@@ -211,9 +214,9 @@
     font-size: 11px;
     padding: 4px 10px;
     border-radius: 100px;
-    background: var(--tag-bg);
-    color: var(--tag-color);
-    border: 1px solid rgba(124,106,247,0.2);
+    background: rgba(124,106,247,0.22);
+    color: #c8beff;
+    border: 1px solid rgba(124,106,247,0.4);
   }
 
   /* SECTION HEADINGS */
@@ -780,11 +783,11 @@
         <p class="contact-sub">Aberto a oportunidades CLT ou PJ, híbrido ou remoto.</p>
       </div>
       <div class="contact-links">
-        <a href="mailto:mauriciob.martins@hotmail.com" class="contact-link">
+        <a href="/cdn-cgi/l/email-protection#6d000c181f040e04020f43000c1f1904031e2d050219000c0401430e0200" class="contact-link">
           <div class="contact-link-icon icon-purple">✉</div>
           <div>
             <div class="cl-label">email</div>
-            <div class="cl-value">mauriciob.martins@hotmail.com</div>
+            <div class="cl-value"><span class="__cf_email__" data-cfemail="0964687c7b606a60666b2764687b7d60677a4961667d64686065276a6664">[email&#160;protected]</span></div>
           </div>
         </a>
         <a href="https://linkedin.com/in/mauricio-martins-303596247/" target="_blank" class="contact-link">
@@ -807,15 +810,3 @@
             <div class="cl-label">telefone</div>
             <div class="cl-value">(11) 99424-6819</div>
           </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  built by <span>Mauricio Martins</span> · São Paulo, SP · 2025
-</footer>
-
-</body>
-</html>

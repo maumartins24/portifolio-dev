@@ -3,857 +3,571 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mauricio Martins — Dev Fullstack</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Mauricio Martins — Dev Backend & Fullstack</title>
+<meta name="description" content="Dev Backend & Fullstack · Python · Node.js · APIs · Dados · Automação · São Paulo, SP">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0c10;
+  --s1:#0f1117;
+  --card:#141820;
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.12);
+  --text:#ced6e4;
+  --sub:#5c6a80;
+  --sub2:#8494aa;
+  --green:#22c55e;
+  --green2:rgba(34,197,94,0.08);
+  --green3:rgba(34,197,94,0.15);
+  --blue:#3b82f6;
+  --blue2:rgba(59,130,246,0.08);
+  --amber:#f59e0b;
+  --amber2:rgba(245,158,11,0.08);
+  --rose:#f43f5e;
+  --rose2:rgba(244,63,94,0.08);
+  --purple:#8b5cf6;
+  --purple2:rgba(139,92,246,0.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.65;font-size:14px}
 
-  :root {
-    --bg: #0a0a0f;
-    --surface: #111118;
-    --card: #16161f;
-    --border: rgba(255,255,255,0.07);
-    --border-hover: rgba(255,255,255,0.14);
-    --text: #f0f0f5;
-    --muted: #6b6b7e;
-    --accent: #7c6af7;
-    --accent2: #3dd6b0;
-    --accent3: #f7a06a;
-    --tag-bg: rgba(124,106,247,0.12);
-    --tag-color: #a99eff;
-  }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:rgba(10,12,16,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.logo{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--text)}
+.logo b{color:var(--green)}
+.nav-links{display:flex;align-items:center;gap:1.8rem}
+.nav-links a{font-size:12px;color:var(--sub2);text-decoration:none;transition:color .15s;font-family:'IBM Plex Mono',monospace;letter-spacing:.03em}
+.nav-links a:hover{color:var(--text)}
+.dot-green{display:inline-flex;align-items:center;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--green)}
+.dot-green::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
-  html { scroll-behavior: smooth; }
+.w{max-width:820px;margin:0 auto;padding:0 1.5rem}
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
+/* HERO */
+#hero{padding:108px 0 72px;border-bottom:1px solid var(--border)}
+.hero-top{display:flex;align-items:center;gap:10px;margin-bottom:1.6rem}
+.badge{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:3px 9px;border-radius:3px;letter-spacing:.04em}
+.b-green{background:var(--green2);color:var(--green);border:1px solid rgba(34,197,94,0.18)}
+.b-blue{background:var(--blue2);color:var(--blue);border:1px solid rgba(59,130,246,0.18)}
+.b-amber{background:var(--amber2);color:var(--amber);border:1px solid rgba(245,158,11,0.18)}
+.b-rose{background:var(--rose2);color:var(--rose);border:1px solid rgba(244,63,94,0.18)}
+.b-purple{background:var(--purple2);color:var(--purple);border:1px solid rgba(139,92,246,0.18)}
+.b-dim{background:rgba(255,255,255,0.04);color:var(--sub2);border:1px solid var(--border)}
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 2rem;
-    height: 60px;
-    background: rgba(10,10,15,0.85);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo {
-    font-family: 'DM Mono', monospace;
-    font-size: 14px;
-    color: var(--accent);
-    letter-spacing: 0.04em;
-  }
-  .nav-links { display: flex; gap: 2rem; }
-  .nav-links a {
-    font-size: 13px;
-    color: var(--muted);
-    text-decoration: none;
-    letter-spacing: 0.04em;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--text); }
+h1{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:700;letter-spacing:-.03em;line-height:1.05;margin-bottom:.5rem;color:#e8edf5}
+.hero-subtitle{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--sub2);margin-bottom:1.4rem;letter-spacing:.02em}
+.hero-subtitle b{color:var(--green)}
+.hero-bio{font-size:14px;color:var(--sub2);line-height:1.75;max-width:560px;margin-bottom:2rem}
+.hero-bio strong{color:var(--text);font-weight:500}
 
-  /* SECTIONS */
-  section { padding: 5rem 0; }
-  .container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+.hero-grid{display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:start}
+.avail-card{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:1.1rem 1.2rem;min-width:200px}
+.ac-head{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--green);display:flex;align-items:center;gap:6px;margin-bottom:.9rem;padding-bottom:.8rem;border-bottom:1px solid var(--border);letter-spacing:.05em}
+.ac-head::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2.5s infinite}
+.ac-row{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.45rem}
+.ac-row:last-child{margin-bottom:0}
+.ac-l{font-size:11px;color:var(--sub);font-family:'IBM Plex Mono',monospace}
+.ac-v{font-size:12px;font-weight:600;color:var(--text)}
+.ac-v.g{color:var(--green)}
 
-  /* HERO */
-  #hero {
-    min-height: 100vh;
-    display: flex; align-items: center;
-    position: relative;
-    overflow: hidden;
-    padding-top: 60px;
-  }
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 2.5rem;
-    align-items: center;
-  }
-  .hero-tag {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    color: var(--accent2);
-    border: 1px solid rgba(61,214,176,0.25);
-    padding: 4px 12px;
-    border-radius: 100px;
-    margin-bottom: 1.5rem;
-    letter-spacing: 0.05em;
-  }
-  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); }
-  .hero-name {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(3rem, 7vw, 5.5rem);
-    font-weight: 800;
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    margin-bottom: 0.5rem;
-  }
-  .hero-name span { color: var(--accent); }
-  .hero-role {
-    font-family: 'DM Mono', monospace;
-    font-size: 15px;
-    color: var(--muted);
-    margin-bottom: 1.5rem;
-    letter-spacing: 0.02em;
-  }
-  .hero-desc {
-    font-size: 15px;
-    color: #9898a8;
-    line-height: 1.7;
-    max-width: 400px;
-    margin-bottom: 2rem;
-  }
-  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 10px 22px;
-    font-size: 13px;
-    font-weight: 500;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: all 0.2s;
-    cursor: pointer;
-    border: none;
-    font-family: 'Inter', sans-serif;
-  }
-  .btn-primary {
-    background: var(--accent);
-    color: #fff;
-  }
-  .btn-primary:hover { background: #6a58e8; transform: translateY(-1px); }
-  .btn-outline {
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--border-hover);
-  }
-  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;font-size:13px;font-weight:600;border-radius:6px;text-decoration:none;transition:all .15s;border:1px solid transparent;font-family:'Inter',sans-serif;letter-spacing:-.01em}
+.btn-p{background:var(--green);color:#0a0c10;border-color:var(--green)}
+.btn-p:hover{background:#16a34a}
+.btn-o{background:transparent;color:var(--sub2);border-color:var(--border2)}
+.btn-o:hover{color:var(--text);border-color:var(--border2)}
 
-  /* HERO VISUAL CARD */
-  .hero-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 2rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-card::before {
-    content: '';
-    position: absolute; top: -40px; right: -40px;
-    width: 180px; height: 180px;
-    background: radial-gradient(circle, rgba(124,106,247,0.15) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-  }
-  .avatar-ring {
-    width: 72px; height: 72px;
-    border-radius: 50%;
-    border: 2px solid var(--accent);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 1rem;
-    font-family: 'Syne', sans-serif;
-    font-size: 24px;
-    font-weight: 800;
-    color: var(--accent);
-    background: rgba(124,106,247,0.08);
-  }
-  .card-name {
-    font-family: 'Syne', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 2px;
-  }
-  .card-sub {
-    font-size: 12px;
-    color: var(--muted);
-    font-family: 'DM Mono', monospace;
-    margin-bottom: 1.5rem;
-  }
-  .card-stat-row {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 6px;
-    margin-bottom: 1.5rem;
-  }
-  .card-stat {
-    background: rgba(255,255,255,0.05);
-    border-radius: 10px;
-    padding: 10px 6px;
-    text-align: center;
-    min-width: 0;
-  }
-  .card-stat-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--accent2);
-    white-space: nowrap;
-  }
-  .card-stat-label {
-    font-size: 9px;
-    color: var(--muted);
-    margin-top: 2px;
-    letter-spacing: 0.02em;
-    white-space: normal;
-    word-break: break-word;
-    line-height: 1.3;
-  }
-  .card-tech-row {
-    display: flex; flex-wrap: wrap; gap: 6px;
-  }
-  .tech-pill {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    padding: 4px 10px;
-    border-radius: 100px;
-    background: rgba(124,106,247,0.22);
-    color: #c8beff;
-    border: 1px solid rgba(124,106,247,0.4);
-  }
+/* NUMBERS */
+.numbers{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.num-item{background:var(--s1);padding:1.4rem 1rem;text-align:center}
+.num-n{font-size:1.8rem;font-weight:700;letter-spacing:-.04em;line-height:1;font-family:'Inter',sans-serif}
+.num-l{font-size:11px;color:var(--sub);margin-top:.35rem;line-height:1.4;font-family:'IBM Plex Mono',monospace}
 
-  /* SECTION HEADINGS */
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-  }
-  .section-title {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(2rem, 4vw, 2.8rem);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    margin-bottom: 0.5rem;
-  }
-  .section-desc {
-    font-size: 15px;
-    color: var(--muted);
-    margin-bottom: 3rem;
-  }
+/* STACK */
+#stack{padding:3.5rem 0;border-bottom:1px solid var(--border)}
+.sec-label{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--sub);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.35rem}
+.sec-title{font-size:1.2rem;font-weight:700;letter-spacing:-.02em;margin-bottom:1.6rem;color:#e8edf5}
 
-  /* EXPERIENCE */
-  .exp-list { display: flex; flex-direction: column; gap: 0; }
-  .exp-item {
-    display: grid;
-    grid-template-columns: 28px 1fr;
-    gap: 0 20px;
-    padding-bottom: 2.5rem;
-    position: relative;
-  }
-  .exp-dot-col { display: flex; flex-direction: column; align-items: center; }
-  .exp-dot {
-    width: 12px; height: 12px;
-    border-radius: 50%;
-    background: var(--accent);
-    border: 2px solid var(--bg);
-    box-shadow: 0 0 0 2px var(--accent);
-    flex-shrink: 0;
-    margin-top: 5px;
-  }
-  .exp-dot.accent2 { background: var(--accent2); box-shadow: 0 0 0 2px var(--accent2); }
-  .exp-line {
-    width: 1px;
-    flex: 1;
-    background: var(--border);
-    margin-top: 6px;
-  }
-  .exp-item:last-child .exp-line { display: none; }
-  .exp-content { padding-bottom: 0; }
-  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; }
-  .exp-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
-  }
-  .exp-company {
-    font-size: 14px;
-    color: var(--accent);
-    margin-bottom: 2px;
-  }
-  .exp-date {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    white-space: nowrap;
-    background: rgba(255,255,255,0.04);
-    padding: 3px 10px;
-    border-radius: 100px;
-    border: 1px solid var(--border);
-  }
-  .exp-date.current { color: var(--accent2); border-color: rgba(61,214,176,0.3); }
-  .exp-desc {
-    font-size: 14px;
-    color: #8888a0;
-    line-height: 1.7;
-    margin-bottom: 12px;
-  }
-  .exp-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .exp-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    padding: 3px 10px;
-    border-radius: 100px;
-    background: rgba(255,255,255,0.04);
-    color: var(--muted);
-    border: 1px solid var(--border);
-  }
+.stack-table{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.st-row{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.9rem 1rem}
+.st-cat{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--sub);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem}
+.st-items{display:flex;flex-wrap:wrap;gap:5px}
+.st-item{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:2px 7px;border-radius:3px}
 
-  /* SKILLS */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 12px;
-  }
-  .skill-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 1.25rem;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .skill-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-  .skill-icon { font-size: 22px; margin-bottom: 10px; }
-  .skill-name {
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    margin-bottom: 4px;
-  }
-  .skill-level {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    margin-bottom: 10px;
-  }
-  .skill-bar-track {
-    height: 3px;
-    background: rgba(255,255,255,0.06);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  .skill-bar-fill {
-    height: 100%;
-    border-radius: 10px;
-    background: var(--accent);
-  }
-  .skill-bar-fill.g { background: var(--accent2); }
-  .skill-bar-fill.o { background: var(--accent3); }
+/* PROJECTS */
+#projetos{padding:3.5rem 0;border-bottom:1px solid var(--border)}
+.proj-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:8px;overflow:hidden}
+.proj{background:var(--card);padding:1.5rem;transition:background .12s}
+.proj:hover{background:var(--s1)}
+.proj-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.7rem;flex-wrap:wrap}
+.proj-name-row{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.proj-name{font-size:14px;font-weight:600;color:#e8edf5;letter-spacing:-.01em}
+.proj-link{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--sub);text-decoration:none;transition:color .12s;white-space:nowrap}
+.proj-link:hover{color:var(--text)}
+.proj-what{font-size:13px;color:var(--sub2);line-height:1.65;margin-bottom:.6rem}
+.proj-what strong{color:var(--text);font-weight:500}
+.proj-impact{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:.7rem}
+.ic{font-size:11px;font-weight:500;padding:2px 8px;border-radius:3px;background:var(--green2);color:var(--green);border:1px solid rgba(34,197,94,0.15);font-family:'IBM Plex Mono',monospace}
+.proj-tech{display:flex;flex-wrap:wrap;gap:4px}
+.tc{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:2px 6px;border-radius:3px;background:rgba(255,255,255,0.04);color:var(--sub);border:1px solid var(--border)}
 
-  /* PROJECTS */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  .project-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1.5rem;
-    transition: border-color 0.2s, transform 0.2s;
-    text-decoration: none;
-    color: inherit;
-    display: block;
-  }
-  .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
-  .project-card.featured {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 1rem;
-    align-items: start;
-  }
-  .project-company {
-    border-color: rgba(61,214,176,0.3) !important;
-    background: linear-gradient(135deg, #16161f 60%, rgba(61,214,176,0.05) 100%);
-  }
-  .project-company:hover { border-color: var(--accent2) !important; transform: translateY(-3px); }
-  .project-badge {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    padding: 3px 9px;
-    border-radius: 100px;
-    margin-bottom: 10px;
-    display: inline-block;
-  }
-  .badge-purple { background: rgba(124,106,247,0.15); color: var(--tag-color); }
-  .badge-green { background: rgba(61,214,176,0.12); color: var(--accent2); }
-  .badge-orange { background: rgba(247,160,106,0.12); color: var(--accent3); }
-  .project-name {
-    font-family: 'Syne', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-  .project-desc { font-size: 13px; color: #8888a0; line-height: 1.6; margin-bottom: 14px; }
-  .project-stack { display: flex; flex-wrap: wrap; gap: 6px; }
-  .project-chip {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    padding: 3px 8px;
-    border-radius: 100px;
-    background: rgba(255,255,255,0.04);
-    color: var(--muted);
-  }
-  .project-arrow {
-    font-size: 18px;
-    color: var(--muted);
-    transition: color 0.2s, transform 0.2s;
-    line-height: 1;
-  }
-  .project-card:hover .project-arrow { color: var(--accent); transform: translate(2px,-2px); }
+/* EXPERIENCE */
+#experiencia{padding:3.5rem 0;border-bottom:1px solid var(--border)}
+.exp-list{display:flex;flex-direction:column}
+.exp{padding:1.6rem 0;border-bottom:1px solid var(--border)}
+.exp:last-child{border-bottom:none;padding-bottom:0}
+.exp-hd{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:.8rem;flex-wrap:wrap}
+.exp-role{font-size:14px;font-weight:600;color:#e8edf5;letter-spacing:-.01em;margin-bottom:.2rem}
+.exp-co{font-size:12px;color:var(--sub2)}
+.exp-co span{font-weight:600;color:var(--sub2)}
+.exp-date{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:2px 8px;border-radius:3px;white-space:nowrap;flex-shrink:0}
+.ed-now{background:var(--green2);color:var(--green);border:1px solid rgba(34,197,94,0.2)}
+.ed-past{background:rgba(255,255,255,0.04);color:var(--sub);border:1px solid var(--border)}
+.exp-buls{display:flex;flex-direction:column;gap:4px;margin-bottom:.8rem}
+.bul{display:flex;gap:10px;font-size:13px;color:var(--sub2);line-height:1.65;align-items:flex-start}
+.bul::before{content:'—';color:var(--sub);flex-shrink:0;font-family:'IBM Plex Mono',monospace;font-size:11px;margin-top:2px}
+.bul strong{color:var(--text);font-weight:500}
+.exp-tags{display:flex;flex-wrap:wrap;gap:4px}
+.et{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:2px 6px;border-radius:3px;background:rgba(255,255,255,0.04);color:var(--sub);border:1px solid var(--border)}
 
-  /* CONTACT */
-  #contato { background: var(--surface); }
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    align-items: center;
-  }
-  .contact-headline {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1.05;
-    margin-bottom: 1rem;
-  }
-  .contact-headline span { color: var(--accent); }
-  .contact-sub { font-size: 15px; color: var(--muted); }
-  .contact-links { display: flex; flex-direction: column; gap: 10px; }
-  .contact-link {
-    display: flex; align-items: center; gap: 14px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 14px 18px;
-    text-decoration: none;
-    color: var(--text);
-    transition: border-color 0.2s, transform 0.2s;
-    font-size: 14px;
-  }
-  .contact-link:hover { border-color: var(--accent); transform: translateX(4px); }
-  .contact-link-icon {
-    width: 36px; height: 36px;
-    border-radius: 9px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
-    flex-shrink: 0;
-  }
-  .icon-purple { background: rgba(124,106,247,0.15); }
-  .icon-blue { background: rgba(56,130,221,0.15); }
-  .icon-green { background: rgba(61,214,176,0.15); }
-  .cl-label { color: var(--muted); font-size: 11px; font-family: 'DM Mono', monospace; }
-  .cl-value { font-size: 14px; font-weight: 500; }
+/* CONTATO */
+#contato{padding:3.5rem 0}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.ct-title{font-size:1.6rem;font-weight:700;letter-spacing:-.03em;color:#e8edf5;margin-bottom:.6rem}
+.ct-title span{color:var(--green)}
+.ct-sub{font-size:13px;color:var(--sub2);line-height:1.7}
+.ct-sub strong{color:var(--text);font-weight:500}
+.links{display:flex;flex-direction:column;gap:7px}
+.cl{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:7px;padding:10px 13px;text-decoration:none;color:var(--text);transition:border-color .12s,transform .12s}
+.cl:hover{border-color:var(--border2);transform:translateX(3px)}
+.cl-ico{width:30px;height:30px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;flex-shrink:0}
+.ci-g{background:var(--green2);color:var(--green)}
+.ci-b{background:var(--blue2);color:var(--blue)}
+.ci-p{background:var(--purple2);color:var(--purple)}
+.cl-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--sub);letter-spacing:.05em}
+.cl-val{font-size:12px;font-weight:500;margin-top:1px}
 
-  /* FOOTER */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 2rem;
-    text-align: center;
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    color: var(--muted);
-  }
-  footer span { color: var(--accent); }
+footer{padding:1.5rem;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--sub);border-top:1px solid var(--border)}
 
-  /* BG GLOW */
-  .bg-glow {
-    position: fixed; pointer-events: none; z-index: 0;
-    border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.15;
-  }
-  .glow1 { width: 600px; height: 600px; background: var(--accent); top: -200px; left: -200px; }
-  .glow2 { width: 400px; height: 400px; background: var(--accent2); bottom: -100px; right: -100px; }
-
-  .relative { position: relative; z-index: 1; }
-
-  .divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 0;
-  }
-
-  @media (max-width: 700px) {
-    .hero-grid, .contact-grid, .projects-grid { grid-template-columns: 1fr; }
-    .project-card.featured { grid-column: auto; display: block; }
-    .hero-card { display: none; }
-    nav .nav-links { display: none; }
-  }
+@media(max-width:660px){
+  .hero-grid,.contact-grid{grid-template-columns:1fr}
+  .avail-card{display:none}
+  .numbers{grid-template-columns:repeat(2,1fr)}
+  nav .nav-links a{display:none}
+}
 </style>
 </head>
 <body>
 
-<div class="bg-glow glow1"></div>
-<div class="bg-glow glow2"></div>
-
 <nav>
-  <span class="nav-logo">maumartins.dev</span>
+  <div class="logo">mauricio<b>.</b>dev</div>
   <div class="nav-links">
-    <a href="#sobre">sobre</a>
-    <a href="#experiencia">experiência</a>
-    <a href="#skills">skills</a>
+    <a href="#stack">stack</a>
     <a href="#projetos">projetos</a>
+    <a href="#experiencia">experiência</a>
     <a href="#contato">contato</a>
+    <span class="dot-green">disponível</span>
   </div>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="container relative">
-    <div class="hero-grid">
-      <div>
-        <div class="hero-tag">disponível para novas oportunidades</div>
-        <h1 class="hero-name">Mauricio<br><span>Martins</span></h1>
-        <p class="hero-role">// Fullstack Developer</p>
-        <p class="hero-desc">Desenvolvedor Fullstack com experiência real em produção — de APIs em NestJS a automações com N8N, de extensões Chrome a dashboards de dados.</p>
-        <div class="hero-btns">
-          <a href="#contato" class="btn btn-primary">Entre em contato ↗</a>
-          <a href="https://github.com/maumartins24" target="_blank" class="btn btn-outline">GitHub →</a>
-        </div>
+<div class="w">
+<div class="hero-grid">
+  <div>
+    <div class="hero-top">
+      <span class="badge b-green">Backend & Fullstack</span>
+      <span class="badge b-blue">Backend Enginee</span>
+      <span class="badge b-dim">São Paulo, SP</span>
+    </div>
+
+    <h1>Mauricio Martins</h1>
+    <p class="hero-subtitle">Python · Node.js · APIs · Dados · <b>Automação</b></p>
+
+    <p class="hero-bio">
+      Dev com 2 anos em produção — construo <strong>pipelines de dados</strong>, <strong>APIs em escala</strong> e <strong>automações reais</strong>.
+      Na Ativa.AI processo 1M+ registros/dia, mantendo servidores, mensageria e dashboards. Co-fundador da M&T Tecnologia Jurídica.
+      Busco time onde engenharia seja levada a sério.
+    </p>
+
+    <div class="btns">
+      <a href="#contato" class="btn btn-p">Entrar em contato</a>
+      <a href="https://github.com/maumartins24" target="_blank" class="btn btn-o">GitHub</a>
+      <a href="https://linkedin.com/in/mauricio-martins-303596247/" target="_blank" class="btn btn-o">LinkedIn</a>
+    </div>
+  </div>
+
+  <div class="avail-card">
+    <div class="ac-head">disponível agora</div>
+    <div class="ac-row"><span class="ac-l">nível</span><span class="ac-v">Junior</span></div>
+    <div class="ac-row"><span class="ac-l">regime</span><span class="ac-v">Híbrido / Remoto</span></div>
+    <div class="ac-row"><span class="ac-l">inglês</span><span class="ac-v">Avançado (B2)</span></div>
+    <div class="ac-row"><span class="ac-l">localização</span><span class="ac-v">São Paulo, SP</span></div>
+  </div>
+</div>
+</div>
+</section>
+
+<!-- NUMBERS -->
+<div class="numbers">
+  <div class="num-item"><div class="num-n" style="color:var(--green)">1M+</div><div class="num-l">registros/dia<br>em produção</div></div>
+  <div class="num-item"><div class="num-n" style="color:var(--blue)">4</div><div class="num-l">relatórios<br>automatizados</div></div>
+  <div class="num-item"><div class="num-n" style="color:var(--amber)">5</div><div class="num-l">dashboards<br>Looker Studio</div></div>
+  <div class="num-item"><div class="num-n" style="color:var(--purple)">2+</div><div class="num-l">anos em<br>produção</div></div>
+</div>
+
+<!-- STACK -->
+<section id="stack">
+<div class="w">
+  <div class="sec-label">stack técnica</div>
+  <div class="sec-title">O que eu uso</div>
+
+  <div class="stack-table">
+    <div class="st-row">
+      <div class="st-cat">Linguagens</div>
+      <div class="st-items">
+        <span class="st-item b-green">Python</span>
+        <span class="st-item b-blue">TypeScript</span>
+        <span class="st-item b-blue">JavaScript</span>
+        <span class="st-item b-dim">Dart</span>
+        <span class="st-item b-dim">C++</span>
       </div>
-      <div class="hero-card">
-        <div class="avatar-ring">MM</div>
-        <div class="card-name">Mauricio Martins</div>
-        <div class="card-sub">São Paulo, SP<br><span style="color:var(--accent);font-size:11px;">Fullstack Dev</span></div>
-        <div class="card-stat-row">
-          <div class="card-stat">
-            <div class="card-stat-num">2+</div>
-            <div class="card-stat-label">anos XP</div>
-          </div>
-          <div class="card-stat">
-            <div class="card-stat-num">29</div>
-            <div class="card-stat-label">repos</div>
-          </div>
-          <div class="card-stat">
-            <div class="card-stat-num">B2</div>
-            <div class="card-stat-label">Inglês</div>
-          </div>
-        </div>
-        <div class="card-tech-row">
-          <span class="tech-pill">Node.js</span>
-          <span class="tech-pill">NestJS</span>
-          <span class="tech-pill">Python</span>
-          <span class="tech-pill">Vue</span>
-          <span class="tech-pill">Docker</span>
-          <span class="tech-pill">PostgreSQL</span>
-        </div>
+    </div>
+    <div class="st-row">
+      <div class="st-cat">Backend</div>
+      <div class="st-items">
+        <span class="st-item b-green">Node.js</span>
+        <span class="st-item b-green">NestJS</span>
+        <span class="st-item b-green">FastAPI</span>
+        <span class="st-item b-green">REST APIs</span>
+        <span class="st-item b-dim">Microsserviços</span>
+      </div>
+    </div>
+    <div class="st-row">
+      <div class="st-cat">Dados & BI</div>
+      <div class="st-items">
+        <span class="st-item b-amber">PostgreSQL</span>
+        <span class="st-item b-amber">MySQL</span>
+        <span class="st-item b-amber">ETL</span>
+        <span class="st-item b-amber">Looker Studio</span>
+        <span class="st-item b-amber">BigQuery</span>
+      </div>
+    </div>
+    <div class="st-row">
+      <div class="st-cat">Mensageria & Automação</div>
+      <div class="st-items">
+        <span class="st-item b-rose">RabbitMQ</span>
+        <span class="st-item b-rose">Apache NIFI</span>
+        <span class="st-item b-rose">N8N</span>
+        <span class="st-item b-rose">Event-Driven</span>
+      </div>
+    </div>
+    <div class="st-row">
+      <div class="st-cat">Infra & DevOps</div>
+      <div class="st-items">
+        <span class="st-item b-purple">Docker</span>
+        <span class="st-item b-purple">Nginx</span>
+        <span class="st-item b-purple">VPS Debian</span>
+        <span class="st-item b-purple">Git/GitHub</span>
+      </div>
+    </div>
+    <div class="st-row">
+      <div class="st-cat">Cloud & Auth</div>
+      <div class="st-items">
+        <span class="st-item b-blue">Google Cloud</span>
+        <span class="st-item b-blue">OAuth2</span>
+        <span class="st-item b-blue">JWT</span>
+        <span class="st-item b-dim">AWS (estudo)</span>
       </div>
     </div>
   </div>
+</div>
 </section>
-
-<hr class="divider">
-
-<!-- EXPERIÊNCIA -->
-<section id="experiencia">
-  <div class="container relative">
-    <div class="section-label">experiência</div>
-    <h2 class="section-title">Trajetória</h2>
-    <p class="section-desc">De estagiário a dev full-time em menos de um ano.</p>
-
-    <div class="exp-list">
-
-      <div class="exp-item">
-        <div class="exp-dot-col">
-          <div class="exp-dot accent2"></div>
-          <div class="exp-line"></div>
-        </div>
-        <div class="exp-content">
-          <div class="exp-header">
-            <div>
-              <div class="exp-title">Desenvolvedor Junior PJ</div>
-              <div class="exp-company">MelloAIT</div>
-            </div>
-            <span class="exp-date current">abr/2025 — atual</span>
-          </div>
-          <p class="exp-desc">Atuação em projetos Fullstack com foco em crescimento técnico. Desenvolvimento de interfaces com Vue.js e Figma, back-end com NestJS e Prisma ORM para modelagem de dados.</p>
-          <div class="exp-tags">
-            <span class="exp-tag">NestJS</span>
-            <span class="exp-tag">Vue.js</span>
-            <span class="exp-tag">Prisma</span>
-            <span class="exp-tag">Node.js</span>
-            <span class="exp-tag">Figma</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-dot-col">
-          <div class="exp-dot"></div>
-          <div class="exp-line"></div>
-        </div>
-        <div class="exp-content">
-          <div class="exp-header">
-            <div>
-              <div class="exp-title">Desenvolvedor Junior PJ</div>
-              <div class="exp-company">Ativa.AI</div>
-            </div>
-            <span class="exp-date current">ago/2024 — atual</span>
-          </div>
-          <p class="exp-desc">Tratativa direta com CEO e COO. Automação de relatórios manuais com APIs em Python/Node, pipelines de dados via N8N, RabbitMQ e NIFI Flow. Criação de extensões Chrome para produtividade, manutenção de servidores, domínios e proxy reverso.</p>
-          <div class="exp-tags">
-            <span class="exp-tag">Python</span>
-            <span class="exp-tag">NestJS</span>
-            <span class="exp-tag">N8N</span>
-            <span class="exp-tag">RabbitMQ</span>
-            <span class="exp-tag">NIFI Flow</span>
-            <span class="exp-tag">Looker Studio</span>
-            <span class="exp-tag">Chrome Extensions</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-dot-col">
-          <div class="exp-dot" style="background:var(--accent3);box-shadow:0 0 0 2px var(--accent3);"></div>
-          <div class="exp-line"></div>
-        </div>
-        <div class="exp-content">
-          <div class="exp-header">
-            <div>
-              <div class="exp-title">Estagiário — Desenvolvimento de Sistemas</div>
-              <div class="exp-company">Ativa.AI</div>
-            </div>
-            <span class="exp-date">mar/2024 — ago/2024</span>
-          </div>
-          <p class="exp-desc">Manutenção de relatórios em Google Sheets, criação de APIs REST, banco de dados PostgreSQL e MySQL, versionamento com Git.</p>
-          <div class="exp-tags">
-            <span class="exp-tag">Python</span>
-            <span class="exp-tag">Node.js</span>
-            <span class="exp-tag">PostgreSQL</span>
-            <span class="exp-tag">MySQL</span>
-            <span class="exp-tag">Git</span>
-            <span class="exp-tag">Google Sheets API</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-dot-col">
-          <div class="exp-dot" style="background:var(--muted);box-shadow:0 0 0 2px var(--muted);"></div>
-        </div>
-        <div class="exp-content">
-          <div class="exp-header">
-            <div>
-              <div class="exp-title">Análise e Desenvolvimento de Sistemas</div>
-              <div class="exp-company">FIT — Impacta de Tecnologia</div>
-            </div>
-            <span class="exp-date">fev/2023 — jul/2025</span>
-          </div>
-          <p class="exp-desc">Formado. Base sólida em engenharia de software, estrutura de dados, banco de dados relacional e desenvolvimento web.</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="container relative">
-    <div class="section-label">stack</div>
-    <h2 class="section-title">Tecnologias</h2>
-    <p class="section-desc">Do back-end à automação, do banco de dados ao browser.</p>
-
-    <div class="skills-grid">
-      <div class="skill-card">
-        <div class="skill-icon">🟢</div>
-        <div class="skill-name">Node.js</div>
-        <div class="skill-level">Back-end runtime</div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%"></div></div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-icon">🔷</div>
-        <div class="skill-name">NestJS</div>
-        <div class="skill-level">Framework principal</div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-icon">🐍</div>
-        <div class="skill-name">Python</div>
-        <div class="skill-level">Automações & APIs</div>
-        <div class="skill-bar-track"><div class="skill-bar-fill g" style="width:80%"></div></div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-icon">💚</div>
-        <div class="skill-name">Vue.js</div>
-        <div class="skill-level">Front-end</div>
-        <div class="skill-bar-track"><div class="skill-bar-fill g" style="width:70%"></div></div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-icon">🐘</div>
-        <div class="skill-name">PostgreSQL</div>
-        <div class="skill-level">Banco relacional</div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-icon">🐳</div>
-        <div class="skill-name">Docker</div>
-        <div class="skill-level">Containers</div>
-        <div class="skill-bar-track"><div class="skill-bar-fill o" style="width:72%"></div></div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-icon">⚡</div>
-        <div class="skill-name">N8N / NIFI</div>
-        <div class="skill-level">Automação de dados</div>
-        <div class="skill-bar-track"><div class="skill-bar-fill g" style="width:78%"></div></div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-icon">🔌</div>
-        <div class="skill-name">RabbitMQ</div>
-        <div class="skill-level">Message broker</div>
-        <div class="skill-bar-track"><div class="skill-bar-fill o" style="width:65%"></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
 
 <!-- PROJETOS -->
 <section id="projetos">
-  <div class="container relative">
-    <div class="section-label">projetos</div>
-    <h2 class="section-title">Construções</h2>
-    <p class="section-desc">Empresa própria, projetos em produção e repositórios no GitHub.</p>
+<div class="w">
+  <div class="sec-label">projetos</div>
+  <div class="sec-title">O que eu construí</div>
 
-    <div class="projects-grid">
+  <div class="proj-list">
 
-      <!-- M&T TECNOLOGIA JURÍDICA — destaque total -->
-      <a href="https://mt-tecnologia-juridica.vercel.app/" target="_blank" class="project-card featured project-company">
-        <div>
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-            <div style="width:36px;height:36px;border-radius:9px;background:rgba(61,214,176,0.15);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--accent2);flex-shrink:0;">M&T</div>
-            <div>
-              <div class="project-badge badge-green" style="margin-bottom:0;">Empresa própria · Em produção</div>
-            </div>
-          </div>
-          <div class="project-name" style="font-size:19px;">M&T Tecnologia Jurídica</div>
-          <p class="project-desc">Co-fundador e desenvolvedor. Startup focada em landing pages e presença digital para advogados e escritórios de advocacia. Site completo em Vue.js com SSG, SEO técnico, tema claro/escuro, formulários de conversão, integração WhatsApp e deploy na Vercel. Parceria com Maria Eduarda (Direito) para garantir comunicação jurídica precisa.</p>
-          <div class="project-stack">
-            <span class="project-chip">Vue.js 3</span>
-            <span class="project-chip">Vite SSG</span>
-            <span class="project-chip">TypeScript</span>
-            <span class="project-chip">SEO</span>
-            <span class="project-chip">Vercel</span>
-            <span class="project-chip">OpenGraph</span>
-            <span class="project-chip">WhatsApp API</span>
-          </div>
-        </div>
-        <div class="project-arrow">↗</div>
-      </a>
-
-      <!-- APIs de Relatórios -->
-      <div class="project-card">
-        <div class="project-badge badge-orange">Automação · Prod</div>
-        <div class="project-name">APIs de Relatórios</div>
-        <p class="project-desc">Automação de relatórios manuais com APIs REST e integração ao Looker Studio. Eliminou horas de trabalho manual na Ativa.AI.</p>
-        <div class="project-stack">
-          <span class="project-chip">NestJS</span>
-          <span class="project-chip">Python</span>
-          <span class="project-chip">Looker Studio</span>
-          <span class="project-chip">REST API</span>
+    <!-- Pipeline Receita Federal -->
+    <div class="proj">
+      <div class="proj-head">
+        <div class="proj-name-row">
+          <span class="proj-name">Pipeline de Dados — Receita Federal & BigQuery</span>
+          <span class="badge b-amber">Produção · 1M+ reg/dia</span>
         </div>
       </div>
-
-      <!-- Chrome Extensions -->
-      <div class="project-card">
-        <div class="project-badge badge-purple">Chrome · Prod</div>
-        <div class="project-name">Extensões Chrome</div>
-        <p class="project-desc">Extensões de produtividade desenvolvidas para uso interno na Ativa.AI, com foco em automação de tarefas repetitivas do dia a dia da equipe.</p>
-        <div class="project-stack">
-          <span class="project-chip">JavaScript</span>
-          <span class="project-chip">Chrome API</span>
-          <span class="project-chip">Manifest V3</span>
-        </div>
+      <p class="proj-what">
+        <strong>Problema:</strong> integração BigQuery/Google Sheets manual quebrando com volume. Projetei sistema próprio do zero que processa 1M+ registros/dia — consulta, agrupamento, exportação e atualização diária automatizada. Inclui <strong>ETL de dados públicos da Receita Federal</strong>: normalização, deduplicação e unificação por CNPJ. Pipeline de importação de CSV para sistemas internos rodando em VPS Debian com Docker.
+      </p>
+      <div class="proj-impact">
+        <span class="ic">1M+ registros/dia</span>
+        <span class="ic">ETL Receita Federal por CNPJ</span>
+        <span class="ic">substituiu integração crítica</span>
+        <span class="ic">atualização diária automatizada</span>
       </div>
-
-      <!-- PyCharm Python Projects -->
-      <a href="https://github.com/maumartins24/PyCharm-PythonProjects" target="_blank" class="project-card">
-        <div class="project-badge badge-green">Python · GitHub</div>
-        <div class="project-name">PyCharm Python Projects</div>
-        <p class="project-desc">Coleção de scripts, automações e experimentos em Python. Repositório pinado, reflete a evolução contínua na linguagem.</p>
-        <div class="project-stack">
-          <span class="project-chip">Python</span>
-          <span class="project-chip">Scripts</span>
-          <span class="project-chip">Automação</span>
-        </div>
-      </a>
-
-      <!-- Portfólio -->
-      <a href="https://portifolio-rust-mu.vercel.app/" target="_blank" class="project-card">
-        <div class="project-badge badge-purple">Fullstack · Deploy</div>
-        <div class="project-name">Portfólio Pessoal</div>
-        <p class="project-desc">Site pessoal anterior deployado na Vercel. Front-end com foco em apresentação profissional.</p>
-        <div class="project-stack">
-          <span class="project-chip">HTML/CSS/JS</span>
-          <span class="project-chip">Vercel</span>
-        </div>
-      </a>
-
-      <!-- Ver mais -->
-      <a href="https://github.com/maumartins24" target="_blank" class="project-card" style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;border-style:dashed;">
-        <div style="font-size:24px;color:var(--muted)">+</div>
-        <div style="font-size:13px;color:var(--muted);text-align:center;">Ver todos os 29 repos<br>no GitHub →</div>
-      </a>
-
+      <div class="proj-tech">
+        <span class="tc">Python</span><span class="tc">Node.js</span><span class="tc">PostgreSQL</span>
+        <span class="tc">Google Cloud</span><span class="tc">BigQuery</span><span class="tc">Docker</span>
+        <span class="tc">VPS Debian</span><span class="tc">ETL</span>
+      </div>
     </div>
+
+    <!-- Automação de relatórios -->
+    <div class="proj">
+      <div class="proj-head">
+        <div class="proj-name-row">
+          <span class="proj-name">APIs de Automação de Relatórios — Ativa.AI</span>
+          <span class="badge b-green">Produção · ~30 pessoas</span>
+        </div>
+      </div>
+      <p class="proj-what">
+        4 relatórios manuais transformados em APIs em <strong>Node.js e Python</strong> — geração, consolidação e distribuição automática. Mantenho <strong>5 dashboards no Looker Studio</strong> com integração de dados para suporte à liderança. Tempo de execução: <strong>~20 minutos total</strong>, beneficiando toda a área técnica (~30 colaboradores).
+      </p>
+      <div class="proj-impact">
+        <span class="ic">4 relatórios automatizados</span>
+        <span class="ic">~20min execução total</span>
+        <span class="ic">~30 colaboradores impactados</span>
+        <span class="ic">5 dashboards ativos</span>
+      </div>
+      <div class="proj-tech">
+        <span class="tc">Node.js</span><span class="tc">Python</span><span class="tc">Looker Studio</span>
+        <span class="tc">PostgreSQL</span><span class="tc">REST API</span>
+      </div>
+    </div>
+
+    <!-- Arquitetura event-driven -->
+    <div class="proj">
+      <div class="proj-head">
+        <div class="proj-name-row">
+          <span class="proj-name">Arquitetura Event-Driven — Agentes de IA</span>
+          <span class="badge b-rose">Microsserviços · Produção</span>
+        </div>
+      </div>
+      <p class="proj-what">
+        Implementei fluxos de automação conectando <strong>microsserviços em arquitetura orientada a eventos</strong> com N8N, RabbitMQ e Apache NIFI. Casos de uso: gestão de dados de agentes de IA para múltiplos clientes e <strong>negativação automática de e-mails em cadências de outbound</strong>.
+      </p>
+      <div class="proj-impact">
+        <span class="ic">arquitetura event-driven</span>
+        <span class="ic">múltiplos clientes</span>
+        <span class="ic">outbound automatizado</span>
+      </div>
+      <div class="proj-tech">
+        <span class="tc">RabbitMQ</span><span class="tc">Apache NIFI</span><span class="tc">N8N</span>
+        <span class="tc">Microsserviços</span><span class="tc">Node.js</span>
+      </div>
+    </div>
+
+    <!-- Extensão Chrome + ChatGPT -->
+    <div class="proj">
+      <div class="proj-head">
+        <div class="proj-name-row">
+          <span class="proj-name">Extensões Chrome com integração ChatGPT API</span>
+          <span class="badge b-purple">Produção interna · 2 builds</span>
+        </div>
+      </div>
+      <p class="proj-what">
+        Desenvolvi 2 extensões Chrome com Manifest V3 — uma com <strong>integração à API do ChatGPT para personalização de contexto e automação de respostas</strong>. Prestei suporte a outras 3 extensões existentes. Foco em produtividade operacional e integração com ferramentas internas da Ativa.AI.
+      </p>
+      <div class="proj-impact">
+        <span class="ic">2 extensões desenvolvidas</span>
+        <span class="ic">integração ChatGPT API</span>
+        <span class="ic">suporte a 3 extensões</span>
+      </div>
+      <div class="proj-tech">
+        <span class="tc">JavaScript</span><span class="tc">Chrome API</span>
+        <span class="tc">Manifest V3</span><span class="tc">OpenAI API</span>
+      </div>
+    </div>
+
+    <!-- M&T -->
+    <div class="proj">
+      <div class="proj-head">
+        <div class="proj-name-row">
+          <span class="proj-name">M&T Tecnologia Jurídica</span>
+          <span class="badge b-green">Empresa própria · Clientes reais</span>
+        </div>
+        <a href="https://mt-tecnologia-juridica.vercel.app/" target="_blank" class="proj-link">ver site ↗</a>
+      </div>
+      <p class="proj-what">
+        Co-fundei empresa de landing pages jurídicas de alta conversão. Responsável pela arquitetura técnica: <strong>Vue.js 3 SSG</strong>, SEO técnico, segurança HTTP (CSP, HSTS), formulários, integração WhatsApp e deploy contínuo via Vercel. Clientes pagantes em produção.
+      </p>
+      <div class="proj-impact">
+        <span class="ic">empresa real com clientes</span>
+        <span class="ic">SEO técnico completo</span>
+        <span class="ic">segurança HTTP (CSP/HSTS)</span>
+      </div>
+      <div class="proj-tech">
+        <span class="tc">Vue.js 3</span><span class="tc">Vite SSG</span><span class="tc">SEO</span>
+        <span class="tc">Vercel</span><span class="tc">WhatsApp API</span>
+      </div>
+    </div>
+
+    <!-- FinTrack -->
+    <div class="proj">
+      <div class="proj-head">
+        <div class="proj-name-row">
+          <span class="proj-name">FinTrack — App de Finanças</span>
+          <span class="badge b-dim">Pessoal · Flutter</span>
+        </div>
+      </div>
+      <p class="proj-what">
+        App mobile em Flutter com <strong>Open Finance via Pluggy API</strong> — conecta automaticamente com Nubank, Itaú, XP e outros bancos. Dashboard com gráficos, histórico de transações e tela de investimentos com rentabilidade. Estado com Provider, persistência local com Hive.
+      </p>
+      <div class="proj-tech">
+        <span class="tc">Flutter</span><span class="tc">Dart</span><span class="tc">Pluggy API</span>
+        <span class="tc">Open Finance</span><span class="tc">Provider</span><span class="tc">Hive</span>
+      </div>
+    </div>
+
   </div>
+</div>
 </section>
 
-<hr class="divider">
+<!-- EXPERIÊNCIA -->
+<section id="experiencia">
+<div class="w">
+  <div class="sec-label">experiência</div>
+  <div class="sec-title">Onde trabalhei</div>
+
+  <div class="exp-list">
+
+    <div class="exp">
+      <div class="exp-hd">
+        <div>
+          <div class="exp-role">Desenvolvedor Backend & Fullstack</div>
+          <div class="exp-co"><span>Ativa.AI</span> · PJ</div>
+        </div>
+        <span class="exp-date ed-now">08/2024 — atual</span>
+      </div>
+      <div class="exp-buls">
+        <div class="bul">Projetei sistema próprio para substituir integração BigQuery/Sheets — <strong>1M+ registros/dia</strong>, ETL Receita Federal por CNPJ, pipelines CSV automatizados.</div>
+        <div class="bul">Automatizei <strong>4 relatórios manuais</strong> em Node.js e Python — execução reduzida para <strong>~20 minutos</strong>, ~30 colaboradores beneficiados.</div>
+        <div class="bul">Implementei arquitetura event-driven com <strong>RabbitMQ, Apache NIFI e N8N</strong> conectando microsserviços para gestão de agentes de IA e outbound.</div>
+        <div class="bul">Desenvolvi <strong>2 extensões Chrome</strong> (uma com integração ChatGPT API) e prestei suporte a outras 3. Mantenho <strong>5 dashboards Looker Studio</strong>.</div>
+        <div class="bul">Gerencio infra completa: <strong>VPS Debian, Nginx, Docker</strong>, PostgreSQL/MySQL, domínios, proxy. Fluxos OAuth2 via Google Cloud Console.</div>
+        <div class="bul">Tratativa direta com CEO e COO · Capacitei 2 colaboradores.</div>
+      </div>
+      <div class="exp-tags">
+        <span class="et">Python</span><span class="et">Node.js</span><span class="et">TypeScript</span>
+        <span class="et">RabbitMQ</span><span class="et">Apache NIFI</span><span class="et">N8N</span>
+        <span class="et">PostgreSQL</span><span class="et">Docker</span><span class="et">Nginx</span>
+        <span class="et">Google Cloud</span><span class="et">OAuth2</span><span class="et">ETL</span>
+      </div>
+    </div>
+
+    <div class="exp">
+      <div class="exp-hd">
+        <div>
+          <div class="exp-role">Desenvolvedor Junior <span style="font-size:11px;color:var(--sub);font-weight:400">(paralelo)</span></div>
+          <div class="exp-co"><span>MelloAIT</span> · PJ</div>
+        </div>
+        <span class="exp-date ed-past">04/2025 — 08/2025</span>
+      </div>
+      <div class="exp-buls">
+        <div class="bul">Frontend em Vue.js a partir de protótipos Figma com hand-off colaborativo.</div>
+        <div class="bul">Análise e desenvolvimento em <strong>C++</strong> sob mentoria de dev sênior.</div>
+      </div>
+      <div class="exp-tags">
+        <span class="et">Vue.js</span><span class="et">C++</span><span class="et">NestJS</span>
+        <span class="et">Prisma</span><span class="et">Figma</span>
+      </div>
+    </div>
+
+    <div class="exp">
+      <div class="exp-hd">
+        <div>
+          <div class="exp-role">Co-fundador & Desenvolvedor</div>
+          <div class="exp-co"><span>M&T Tecnologia Jurídica</span></div>
+        </div>
+        <span class="exp-date ed-now">2025 — atual</span>
+      </div>
+      <div class="exp-buls">
+        <div class="bul">Empresa de landing pages jurídicas — <strong>arquitetura técnica completa</strong>, clientes pagantes em produção.</div>
+      </div>
+      <div class="exp-tags">
+        <span class="et">Vue.js 3</span><span class="et">Vite SSG</span><span class="et">SEO</span><span class="et">Vercel</span>
+      </div>
+    </div>
+
+    <div class="exp">
+      <div class="exp-hd">
+        <div>
+          <div class="exp-role">Estagiário — Desenvolvimento de Sistemas</div>
+          <div class="exp-co"><span>Ativa.AI</span></div>
+        </div>
+        <span class="exp-date ed-past">04/2024 — 08/2024</span>
+      </div>
+      <div class="exp-buls">
+        <div class="bul">APIs em Node.js, NestJS e Python — Google Sheets e relatórios internos.</div>
+        <div class="bul"><strong>Promovido a Pleno em 4 meses</strong> após entregas consistentes.</div>
+      </div>
+      <div class="exp-tags">
+        <span class="et">Node.js</span><span class="et">NestJS</span><span class="et">Python</span>
+        <span class="et">PostgreSQL</span><span class="et">MySQL</span><span class="et">Git</span>
+      </div>
+    </div>
+
+    <div class="exp" style="border-bottom:none;padding-bottom:0">
+      <div class="exp-hd">
+        <div>
+          <div class="exp-role">Análise e Desenvolvimento de Sistemas</div>
+          <div class="exp-co"><span>FIT — Impacta de Tecnologia</span></div>
+        </div>
+        <span class="exp-date ed-past">02/2023 — 07/2025 · Formado</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
 
 <!-- CONTATO -->
 <section id="contato">
-  <div class="container relative">
-    <div class="contact-grid">
-      <div>
-        <div class="section-label">contato</div>
-        <h2 class="contact-headline">Vamos <span>construir</span> algo juntos?</h2>
-        <p class="contact-sub">Aberto a oportunidades CLT ou PJ, híbrido ou remoto.</p>
-      </div>
-      <div class="contact-links">
-        <a href="/cdn-cgi/l/email-protection#6d000c181f040e04020f43000c1f1904031e2d050219000c0401430e0200" class="contact-link">
-          <div class="contact-link-icon icon-purple">✉</div>
-          <div>
-            <div class="cl-label">email</div>
-            <div class="cl-value"><span class="__cf_email__" data-cfemail="0964687c7b606a60666b2764687b7d60677a4961667d64686065276a6664">[email&#160;protected]</span></div>
-          </div>
-        </a>
-        <a href="https://linkedin.com/in/mauricio-martins-303596247/" target="_blank" class="contact-link">
-          <div class="contact-link-icon icon-blue">in</div>
-          <div>
-            <div class="cl-label">linkedin</div>
-            <div class="cl-value">mauricio-martins-303596247</div>
-          </div>
-        </a>
-        <a href="https://github.com/maumartins24" target="_blank" class="contact-link">
-          <div class="contact-link-icon icon-green">gh</div>
-          <div>
-            <div class="cl-label">github</div>
-            <div class="cl-value">maumartins24</div>
-          </div>
-        </a>
-        <a href="tel:+5511994246819" class="contact-link">
-          <div class="contact-link-icon icon-purple">📞</div>
-          <div>
-            <div class="cl-label">telefone</div>
-            <div class="cl-value">(11) 99424-6819</div>
-          </div>
+<div class="w">
+  <div class="contact-grid">
+    <div>
+      <div class="sec-label" style="margin-bottom:.4rem">contato</div>
+      <div class="ct-title">Pronto para<br><span>conversar?</span></div>
+      <p class="ct-sub">
+        Busco vaga <strong>Junior</strong> — CLT ou PJ.<br>
+        Híbrido ou remoto.<br><br>
+        Foco em backend, dados e automação.<br>
+        Respondo rápido — prefiro e-mail ou LinkedIn.
+      </p>
+    </div>
+    <div class="links">
+      <a href="mailto:mauriciob.martins@hotmail.com" class="cl">
+        <div class="cl-ico ci-g">@</div>
+        <div><div class="cl-lbl">email</div><div class="cl-val">mauriciob.martins@hotmail.com</div></div>
+      </a>
+      <a href="https://linkedin.com/in/mauricio-martins-303596247/" target="_blank" class="cl">
+        <div class="cl-ico ci-b">in</div>
+        <div><div class="cl-lbl">linkedin</div><div class="cl-val">mauricio-martins-303596247</div></div>
+      </a>
+      <a href="https://github.com/maumartins24" target="_blank" class="cl">
+        <div class="cl-ico ci-p">gh</div>
+        <div><div class="cl-lbl">github</div><div class="cl-val">maumartins24</div></div>
+      </a>
+      <a href="https://mt-tecnologia-juridica.vercel.app/" target="_blank" class="cl">
+        <div class="cl-ico ci-g" style="font-size:9px">M&T</div>
+        <div><div class="cl-lbl">empresa</div><div class="cl-val">mt-tecnologia-juridica.vercel.app</div></div>
+      </a>
+      <a href="tel:+5511994246819" class="cl">
+        <div class="cl-ico ci-p">tel</div>
+        <div><div class="cl-lbl">telefone</div><div class="cl-val">(11) 99424-6819</div></div>
+      </a>
+    </div>
+  </div>
+</div>
+</section>
+
+<footer>Mauricio Martins · Backend & Fullstack · São Paulo · 2025</footer>
+
+</body>
+</html>

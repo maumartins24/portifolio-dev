@@ -1,39 +1,59 @@
-<!-- AJUSTES PRINCIPAIS:
-1. Visual mais próximo da identidade da M&T (neon purple + mint)
-2. Hero mais forte visualmente
-3. Glow gradient no fundo
-4. Cards mais premium
-5. Hover mais moderno
-6. Melhor responsividade
-7. Melhor hierarquia visual
-8. Destaque maior para CTA
--->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mauricio Martins — Backend & Fullstack Developer</title>
+
+<meta name="description" content="Backend & Fullstack Developer especializado em Python, Node.js, APIs, automação, dados e arquitetura escalável. São Paulo, SP.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-*,*::before,*::after{
+
+/* =========================================================
+RESET
+========================================================= */
+
+*,
+*::before,
+*::after{
   box-sizing:border-box;
   margin:0;
-  padding:0
+  padding:0;
 }
 
+/* =========================================================
+ROOT
+========================================================= */
+
 :root{
+
   --bg:#07080d;
   --bg2:#0c1018;
-  --card:#10141d;
-  --card2:#151b26;
+
+  --card:#11151e;
+  --card2:#171d28;
 
   --text:#eef2ff;
-  --sub:#93a0b8;
-  --sub2:#64748b;
+  --sub:#9aa8c2;
+  --sub2:#6b7a94;
 
-  --border:rgba(255,255,255,0.08);
-  --border2:rgba(255,255,255,0.15);
+  --border:rgba(255,255,255,.08);
+  --border2:rgba(255,255,255,.14);
 
-  /* M&T COLORS */
+  /* BRAND */
   --purple:#7c3aed;
   --purple-light:#a855f7;
+
   --mint:#2df7c1;
+
   --blue:#4f7cff;
+
   --pink:#ff4fd8;
 
   --purple-bg:rgba(124,58,237,.12);
@@ -47,14 +67,21 @@
     #4f7cff 45%,
     #2df7c1 100%
   );
+
 }
 
+/* =========================================================
+GLOBAL
+========================================================= */
+
 html{
-  scroll-behavior:smooth
+  scroll-behavior:smooth;
 }
 
 body{
+
   font-family:'Inter',sans-serif;
+
   background:
     radial-gradient(circle at top left, rgba(124,58,237,.16), transparent 32%),
     radial-gradient(circle at top right, rgba(45,247,193,.10), transparent 28%),
@@ -62,16 +89,21 @@ body{
     var(--bg);
 
   color:var(--text);
+
   overflow-x:hidden;
+
   line-height:1.7;
+
   font-size:14px;
 }
 
-/* GLOW FX */
 body::before{
+
   content:'';
+
   position:fixed;
   inset:0;
+
   background:
   linear-gradient(
     90deg,
@@ -79,19 +111,42 @@ body::before{
     rgba(124,58,237,.02),
     transparent
   );
+
   pointer-events:none;
+
   z-index:-1;
 }
 
-/* NAV */
+img{
+  max-width:100%;
+}
+
+a{
+  color:inherit;
+}
+
+.w{
+  width:100%;
+  max-width:1120px;
+  margin:0 auto;
+  padding:0 1.5rem;
+}
+
+/* =========================================================
+NAV
+========================================================= */
+
 nav{
+
   position:fixed;
+
   top:0;
   left:0;
   right:0;
+
   z-index:100;
 
-  height:60px;
+  height:64px;
 
   display:flex;
   align-items:center;
@@ -100,16 +155,21 @@ nav{
   padding:0 2rem;
 
   background:rgba(7,8,13,.82);
+
   backdrop-filter:blur(18px);
 
   border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 .logo{
+
   font-family:'IBM Plex Mono',monospace;
+
   font-size:14px;
+
   color:white;
-  letter-spacing:.04em;
+
+  letter-spacing:.05em;
 }
 
 .logo b{
@@ -117,17 +177,24 @@ nav{
 }
 
 .nav-links{
+
   display:flex;
   align-items:center;
   gap:2rem;
 }
 
 .nav-links a{
+
   font-size:12px;
+
   color:var(--sub);
+
   text-decoration:none;
+
   transition:.2s;
+
   font-family:'IBM Plex Mono',monospace;
+
   letter-spacing:.05em;
 }
 
@@ -136,86 +203,109 @@ nav{
 }
 
 .dot-green{
+
   display:inline-flex;
   align-items:center;
   gap:6px;
 
+  color:var(--mint);
+
   font-family:'IBM Plex Mono',monospace;
   font-size:11px;
-
-  color:var(--mint);
 }
 
 .dot-green::before{
+
   content:'';
+
   width:7px;
   height:7px;
+
   border-radius:50%;
+
   background:var(--mint);
 
   box-shadow:
   0 0 12px var(--mint),
-  0 0 20px var(--mint);
+  0 0 22px var(--mint);
 
   animation:blink 2.5s infinite;
 }
 
 @keyframes blink{
-  0%,100%{opacity:1}
-  50%{opacity:.35}
+
+  0%,100%{
+    opacity:1;
+  }
+
+  50%{
+    opacity:.35;
+  }
 }
 
-.w{
-  max-width:1120px;
-  margin:0 auto;
-  padding:0 1.5rem;
-}
+/* =========================================================
+HERO
+========================================================= */
 
-/* HERO */
 #hero{
+
   position:relative;
-  padding:140px 0 90px;
+
+  padding:150px 0 90px;
+
   overflow:hidden;
 }
 
 #hero::before{
+
   content:'';
+
   position:absolute;
+
   width:700px;
   height:700px;
 
-  background:
-  radial-gradient(circle, rgba(124,58,237,.18), transparent 70%);
+  top:-320px;
+  right:-220px;
 
-  top:-300px;
-  right:-200px;
+  background:
+  radial-gradient(circle, rgba(124,58,237,.20), transparent 70%);
 
   z-index:-1;
 }
 
 .hero-grid{
+
   display:grid;
+
   grid-template-columns:1fr 320px;
+
   gap:4rem;
+
   align-items:center;
 }
 
 .hero-top{
+
   display:flex;
-  gap:10px;
   flex-wrap:wrap;
+  gap:10px;
+
   margin-bottom:1.8rem;
 }
 
 .badge{
+
+  padding:5px 10px;
+
+  border-radius:999px;
+
+  border:1px solid transparent;
+
   font-family:'IBM Plex Mono',monospace;
   font-size:10px;
 
-  padding:5px 10px;
-  border-radius:999px;
-
   letter-spacing:.06em;
-  border:1px solid transparent;
 }
 
 .b-green{
@@ -232,7 +322,7 @@ nav{
 
 .b-purple{
   background:var(--purple-bg);
-  color:#b88cff;
+  color:#c084fc;
   border-color:rgba(124,58,237,.22);
 }
 
@@ -243,9 +333,13 @@ nav{
 }
 
 h1{
+
   font-size:clamp(3rem,7vw,5.5rem);
+
   line-height:.95;
+
   letter-spacing:-.06em;
+
   margin-bottom:1rem;
 
   font-weight:800;
@@ -254,11 +348,14 @@ h1{
 }
 
 .hero-subtitle{
-  font-family:'IBM Plex Mono',monospace;
-  font-size:14px;
-  color:#b7c2d9;
 
-  margin-bottom:1.6rem;
+  font-family:'IBM Plex Mono',monospace;
+
+  font-size:14px;
+
+  color:#b9c7e3;
+
+  margin-bottom:1.5rem;
 }
 
 .hero-subtitle b{
@@ -266,11 +363,14 @@ h1{
 }
 
 .hero-bio{
+
   max-width:720px;
+
   color:var(--sub);
 
   font-size:15px;
-  line-height:1.85;
+
+  line-height:1.9;
 
   margin-bottom:2rem;
 }
@@ -280,23 +380,28 @@ h1{
   font-weight:600;
 }
 
-/* BUTTONS */
+/* =========================================================
+BUTTONS
+========================================================= */
+
 .btns{
+
   display:flex;
   gap:12px;
   flex-wrap:wrap;
 }
 
 .btn{
+
   display:inline-flex;
   align-items:center;
   justify-content:center;
 
-  min-height:48px;
+  min-height:50px;
 
   padding:0 24px;
 
-  border-radius:12px;
+  border-radius:14px;
 
   text-decoration:none;
 
@@ -309,34 +414,47 @@ h1{
 }
 
 .btn-p{
+
   background:var(--gradient);
-  color:#05070d;
+
+  color:#06080f;
 
   box-shadow:
   0 10px 35px rgba(124,58,237,.35);
 }
 
 .btn-p:hover{
+
   transform:translateY(-2px);
+
   box-shadow:
   0 18px 50px rgba(124,58,237,.45);
 }
 
 .btn-o{
+
   background:rgba(255,255,255,.03);
+
   border-color:rgba(255,255,255,.08);
+
   color:white;
 }
 
 .btn-o:hover{
+
   border-color:rgba(45,247,193,.35);
+
   color:var(--mint);
 
   background:rgba(45,247,193,.05);
 }
 
-/* CARD */
+/* =========================================================
+AVAILABLE CARD
+========================================================= */
+
 .avail-card{
+
   position:relative;
 
   background:
@@ -348,17 +466,19 @@ h1{
 
   border:1px solid rgba(255,255,255,.08);
 
-  border-radius:24px;
+  border-radius:26px;
 
-  padding:1.5rem;
-
-  backdrop-filter:blur(12px);
+  padding:1.6rem;
 
   overflow:hidden;
+
+  backdrop-filter:blur(12px);
 }
 
 .avail-card::before{
+
   content:'';
+
   position:absolute;
   inset:0;
 
@@ -374,10 +494,6 @@ h1{
 }
 
 .ac-head{
-  font-family:'IBM Plex Mono',monospace;
-  font-size:11px;
-
-  color:var(--mint);
 
   display:flex;
   align-items:center;
@@ -388,14 +504,23 @@ h1{
 
   border-bottom:1px solid rgba(255,255,255,.06);
 
+  color:var(--mint);
+
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+
   letter-spacing:.08em;
+
   text-transform:uppercase;
 }
 
 .ac-head::before{
+
   content:'';
+
   width:8px;
   height:8px;
+
   border-radius:50%;
 
   background:var(--mint);
@@ -406,6 +531,7 @@ h1{
 }
 
 .ac-row{
+
   display:flex;
   justify-content:space-between;
   gap:1rem;
@@ -414,14 +540,18 @@ h1{
 }
 
 .ac-l{
+
   color:var(--sub2);
+
   font-size:11px;
 
   font-family:'IBM Plex Mono',monospace;
 }
 
 .ac-v{
+
   color:white;
+
   font-size:13px;
   font-weight:600;
 }
@@ -430,20 +560,27 @@ h1{
   color:var(--mint);
 }
 
-/* NUMBERS */
+/* =========================================================
+NUMBERS
+========================================================= */
+
 .numbers{
+
   display:grid;
+
   grid-template-columns:repeat(4,1fr);
+
   gap:18px;
 
-  margin-top:10px;
-  padding:0 1.5rem 3rem;
-
   max-width:1120px;
-  margin-inline:auto;
+
+  margin:0 auto;
+
+  padding:0 1.5rem 3rem;
 }
 
 .num-item{
+
   background:
   linear-gradient(
     180deg,
@@ -453,7 +590,7 @@ h1{
 
   border:1px solid rgba(255,255,255,.08);
 
-  border-radius:18px;
+  border-radius:20px;
 
   padding:2rem 1rem;
 
@@ -463,52 +600,42 @@ h1{
 }
 
 .num-item:hover{
+
   transform:translateY(-4px);
+
   border-color:rgba(124,58,237,.25);
 }
 
 .num-n{
+
   font-size:2.2rem;
+
   font-weight:800;
+
   letter-spacing:-.06em;
 }
 
 .num-l{
+
   margin-top:.6rem;
 
   font-size:11px;
+
   color:var(--sub);
+
+  line-height:1.5;
 
   font-family:'IBM Plex Mono',monospace;
 }
 
-/* SECTION */
+/* =========================================================
+SECTIONS
+========================================================= */
+
 section{
   position:relative;
 }
 
-.sec-label{
-  font-family:'IBM Plex Mono',monospace;
-  font-size:10px;
-
-  color:var(--mint);
-
-  letter-spacing:.16em;
-  text-transform:uppercase;
-
-  margin-bottom:.5rem;
-}
-
-.sec-title{
-  font-size:2rem;
-  font-weight:800;
-
-  letter-spacing:-.04em;
-
-  margin-bottom:2rem;
-}
-
-/* STACK */
 #stack,
 #projetos,
 #experiencia,
@@ -516,13 +643,47 @@ section{
   padding:5rem 0;
 }
 
+.sec-label{
+
+  font-family:'IBM Plex Mono',monospace;
+
+  font-size:10px;
+
+  color:var(--mint);
+
+  letter-spacing:.16em;
+
+  text-transform:uppercase;
+
+  margin-bottom:.5rem;
+}
+
+.sec-title{
+
+  font-size:2rem;
+
+  font-weight:800;
+
+  letter-spacing:-.04em;
+
+  margin-bottom:2rem;
+}
+
+/* =========================================================
+STACK
+========================================================= */
+
 .stack-table{
+
   display:grid;
+
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
   gap:16px;
 }
 
 .st-row{
+
   background:
   linear-gradient(
     180deg,
@@ -532,7 +693,7 @@ section{
 
   border:1px solid rgba(255,255,255,.08);
 
-  border-radius:18px;
+  border-radius:20px;
 
   padding:1.2rem;
 
@@ -540,44 +701,57 @@ section{
 }
 
 .st-row:hover{
+
   transform:translateY(-4px);
+
   border-color:rgba(124,58,237,.22);
 }
 
 .st-cat{
+
   font-family:'IBM Plex Mono',monospace;
+
   font-size:10px;
 
   color:var(--mint);
 
   letter-spacing:.12em;
+
   text-transform:uppercase;
 
   margin-bottom:1rem;
 }
 
 .st-items{
+
   display:flex;
   flex-wrap:wrap;
   gap:7px;
 }
 
 .st-item{
-  font-family:'IBM Plex Mono',monospace;
-  font-size:11px;
 
   padding:5px 9px;
+
   border-radius:999px;
+
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
 }
 
-/* PROJ */
+/* =========================================================
+PROJECTS
+========================================================= */
+
 .proj-list{
+
   display:flex;
   flex-direction:column;
   gap:18px;
 }
 
 .proj{
+
   background:
   linear-gradient(
     180deg,
@@ -595,39 +769,100 @@ section{
 }
 
 .proj:hover{
+
   transform:translateY(-5px);
+
   border-color:rgba(124,58,237,.25);
 
   box-shadow:
   0 20px 40px rgba(0,0,0,.25);
 }
 
+.proj-head{
+
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:1rem;
+  flex-wrap:wrap;
+}
+
+.proj-name-row{
+
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
 .proj-name{
+
   font-size:18px;
+
   font-weight:700;
 }
 
+.proj-link{
+
+  color:var(--mint);
+
+  text-decoration:none;
+
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+}
+
 .proj-what{
+
   margin-top:1rem;
+
   color:var(--sub);
+
+  line-height:1.9;
 }
 
 .proj-what strong{
   color:white;
 }
 
-.proj-tech{
+.proj-impact{
+
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+
   margin-top:1rem;
+}
+
+.ic{
+
+  padding:5px 9px;
+
+  border-radius:999px;
+
+  background:var(--mint-bg);
+
+  border:1px solid rgba(45,247,193,.18);
+
+  color:var(--mint);
+
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
+}
+
+.proj-tech{
+
   display:flex;
   flex-wrap:wrap;
   gap:7px;
+
+  margin-top:1rem;
 }
 
 .tc{
-  font-family:'IBM Plex Mono',monospace;
-  font-size:10px;
 
   padding:5px 8px;
+
   border-radius:999px;
 
   background:rgba(255,255,255,.04);
@@ -635,21 +870,74 @@ section{
   border:1px solid rgba(255,255,255,.08);
 
   color:#c0cae0;
+
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
 }
 
-/* EXPERIENCE */
+/* =========================================================
+EXPERIENCE
+========================================================= */
+
 .exp{
+
   padding:2rem 0;
+
   border-bottom:1px solid rgba(255,255,255,.06);
 }
 
+.exp:last-child{
+  border-bottom:none;
+}
+
+.exp-hd{
+
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:1rem;
+  flex-wrap:wrap;
+}
+
 .exp-role{
+
   font-size:18px;
+
   font-weight:700;
 }
 
 .exp-co{
-  margin-top:.3rem;
+
+  margin-top:.35rem;
+
+  color:var(--sub);
+}
+
+.exp-date{
+
+  padding:5px 10px;
+
+  border-radius:999px;
+
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
+}
+
+.ed-now{
+
+  background:var(--mint-bg);
+
+  border:1px solid rgba(45,247,193,.18);
+
+  color:var(--mint);
+}
+
+.ed-past{
+
+  background:rgba(255,255,255,.04);
+
+  border:1px solid rgba(255,255,255,.08);
+
   color:var(--sub);
 }
 
@@ -658,44 +946,110 @@ section{
 }
 
 .bul{
+
+  display:flex;
+  gap:10px;
+
   color:var(--sub);
-  margin-bottom:.7rem;
+
+  margin-bottom:.8rem;
+}
+
+.bul::before{
+
+  content:'—';
+
+  color:var(--mint);
 }
 
 .bul strong{
   color:white;
 }
 
-/* CONTACT */
+.exp-tags{
+
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+
+  margin-top:1rem;
+}
+
+.et{
+
+  padding:5px 8px;
+
+  border-radius:999px;
+
+  background:rgba(255,255,255,.04);
+
+  border:1px solid rgba(255,255,255,.08);
+
+  color:#c0cae0;
+
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
+}
+
+/* =========================================================
+CONTACT
+========================================================= */
+
 .contact-grid{
+
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
   gap:4rem;
 }
 
 .ct-title{
+
   font-size:3rem;
+
   line-height:1;
+
   letter-spacing:-.06em;
+
   margin-bottom:1rem;
 }
 
 .ct-title span{
+
   background:var(--gradient);
+
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
+.ct-sub{
+
+  color:var(--sub);
+
+  line-height:1.9;
+}
+
+.ct-sub strong{
+  color:white;
+}
+
 .links{
+
   display:flex;
   flex-direction:column;
   gap:12px;
 }
 
 .cl{
+
   display:flex;
   align-items:center;
   gap:14px;
+
+  padding:14px 16px;
+
+  border-radius:18px;
 
   background:
   linear-gradient(
@@ -706,21 +1060,20 @@ section{
 
   border:1px solid rgba(255,255,255,.08);
 
-  border-radius:16px;
-
-  padding:14px 16px;
-
   text-decoration:none;
 
   transition:.2s;
 }
 
 .cl:hover{
+
   transform:translateX(6px);
+
   border-color:rgba(45,247,193,.25);
 }
 
 .cl-ico{
+
   width:42px;
   height:42px;
 
@@ -751,20 +1104,28 @@ section{
 }
 
 .cl-lbl{
-  font-family:'IBM Plex Mono',monospace;
-  font-size:10px;
 
   color:var(--sub2);
+
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
 }
 
 .cl-val{
+
   color:white;
+
   margin-top:2px;
 }
 
-/* FOOTER */
+/* =========================================================
+FOOTER
+========================================================= */
+
 footer{
+
   padding:2rem;
+
   text-align:center;
 
   border-top:1px solid rgba(255,255,255,.06);
@@ -775,16 +1136,15 @@ footer{
   font-size:11px;
 }
 
-/* MOBILE */
-@media(max-width:900px){
+/* =========================================================
+RESPONSIVE
+========================================================= */
+
+@media(max-width:920px){
 
   .hero-grid,
   .contact-grid{
     grid-template-columns:1fr;
-  }
-
-  .avail-card{
-    max-width:100%;
   }
 
   .numbers{
@@ -792,11 +1152,11 @@ footer{
   }
 
   h1{
-    font-size:3.4rem;
+    font-size:3.6rem;
   }
 }
 
-@media(max-width:640px){
+@media(max-width:680px){
 
   nav{
     padding:0 1rem;
@@ -810,14 +1170,6 @@ footer{
     grid-template-columns:1fr;
   }
 
-  h1{
-    font-size:2.7rem;
-  }
-
-  .ct-title{
-    font-size:2.2rem;
-  }
-
   .btn{
     width:100%;
   }
@@ -825,5 +1177,312 @@ footer{
   .btns{
     flex-direction:column;
   }
+
+  h1{
+    font-size:2.8rem;
+  }
+
+  .ct-title{
+    font-size:2.2rem;
+  }
 }
+
 </style>
+</head>
+
+<body>
+
+<!-- =========================================================
+NAV
+========================================================= -->
+
+<nav>
+
+  <div class="logo">
+    mauricio<b>.</b>dev
+  </div>
+
+  <div class="nav-links">
+    <a href="#stack">stack</a>
+    <a href="#projetos">projetos</a>
+    <a href="#experiencia">experiência</a>
+    <a href="#contato">contato</a>
+
+    <span class="dot-green">
+      disponível
+    </span>
+  </div>
+
+</nav>
+
+<!-- =========================================================
+HERO
+========================================================= -->
+
+<section id="hero">
+
+  <div class="w">
+
+    <div class="hero-grid">
+
+      <div>
+
+        <div class="hero-top">
+
+          <span class="badge b-green">
+            Backend & Fullstack
+          </span>
+
+          <span class="badge b-blue">
+            Junior → Pleno
+          </span>
+
+          <span class="badge b-dim">
+            São Paulo, SP
+          </span>
+
+        </div>
+
+        <h1>
+          Mauricio<br>
+          Martins
+        </h1>
+
+        <p class="hero-subtitle">
+          Python · Node.js · APIs · Dados · <b>Automação</b>
+        </p>
+
+        <p class="hero-bio">
+
+          Desenvolvedor com experiência em
+          <strong>backend escalável</strong>,
+          <strong>pipelines de dados</strong>,
+          <strong>arquitetura event-driven</strong>
+          e automações em produção.
+
+          Atualmente construo sistemas que processam
+          <strong>1M+ registros por dia</strong>,
+          atuando com infraestrutura, APIs, ETL,
+          dashboards e mensageria.
+
+          Co-fundador da M&T Tecnologia Jurídica.
+
+        </p>
+
+        <div class="btns">
+
+          <a href="#contato" class="btn btn-p">
+            Entrar em contato
+          </a>
+
+          <a href="https://github.com/maumartins24"
+             target="_blank"
+             class="btn btn-o">
+            GitHub
+          </a>
+
+          <a href="https://linkedin.com/in/mauricio-martins-303596247/"
+             target="_blank"
+             class="btn btn-o">
+            LinkedIn
+          </a>
+
+        </div>
+
+      </div>
+
+      <!-- CARD -->
+
+      <div class="avail-card">
+
+        <div class="ac-head">
+          disponível agora
+        </div>
+
+        <div class="ac-row">
+          <span class="ac-l">nível</span>
+          <span class="ac-v">Junior / Pleno</span>
+        </div>
+
+        <div class="ac-row">
+          <span class="ac-l">pretensão PJ</span>
+          <span class="ac-v g">R$ 4–6k</span>
+        </div>
+
+        <div class="ac-row">
+          <span class="ac-l">regime</span>
+          <span class="ac-v">Híbrido / Remoto</span>
+        </div>
+
+        <div class="ac-row">
+          <span class="ac-l">inglês</span>
+          <span class="ac-v">Avançado (B2)</span>
+        </div>
+
+        <div class="ac-row">
+          <span class="ac-l">stack</span>
+          <span class="ac-v">Python · Node</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================================================
+NUMBERS
+========================================================= -->
+
+<div class="numbers">
+
+  <div class="num-item">
+    <div class="num-n" style="color:var(--mint)">
+      1M+
+    </div>
+
+    <div class="num-l">
+      registros/dia<br>
+      em produção
+    </div>
+  </div>
+
+  <div class="num-item">
+    <div class="num-n" style="color:var(--blue)">
+      4
+    </div>
+
+    <div class="num-l">
+      relatórios<br>
+      automatizados
+    </div>
+  </div>
+
+  <div class="num-item">
+    <div class="num-n" style="color:#c084fc">
+      5
+    </div>
+
+    <div class="num-l">
+      dashboards<br>
+      ativos
+    </div>
+  </div>
+
+  <div class="num-item">
+    <div class="num-n" style="color:#fff">
+      2+
+    </div>
+
+    <div class="num-l">
+      anos em<br>
+      produção
+    </div>
+  </div>
+
+</div>
+
+<!-- =========================================================
+STACK
+========================================================= -->
+
+<section id="stack">
+
+  <div class="w">
+
+    <div class="sec-label">
+      stack técnica
+    </div>
+
+    <div class="sec-title">
+      Tecnologias que utilizo
+    </div>
+
+    <div class="stack-table">
+
+      <div class="st-row">
+
+        <div class="st-cat">
+          Linguagens
+        </div>
+
+        <div class="st-items">
+
+          <span class="st-item b-green">Python</span>
+          <span class="st-item b-blue">TypeScript</span>
+          <span class="st-item b-blue">JavaScript</span>
+          <span class="st-item b-dim">Dart</span>
+          <span class="st-item b-dim">C++</span>
+
+        </div>
+
+      </div>
+
+      <div class="st-row">
+
+        <div class="st-cat">
+          Backend
+        </div>
+
+        <div class="st-items">
+
+          <span class="st-item b-green">Node.js</span>
+          <span class="st-item b-green">NestJS</span>
+          <span class="st-item b-green">FastAPI</span>
+          <span class="st-item b-green">REST APIs</span>
+
+        </div>
+
+      </div>
+
+      <div class="st-row">
+
+        <div class="st-cat">
+          Dados & BI
+        </div>
+
+        <div class="st-items">
+
+          <span class="st-item b-blue">PostgreSQL</span>
+          <span class="st-item b-blue">BigQuery</span>
+          <span class="st-item b-blue">ETL</span>
+          <span class="st-item b-blue">Looker Studio</span>
+
+        </div>
+
+      </div>
+
+      <div class="st-row">
+
+        <div class="st-cat">
+          Mensageria
+        </div>
+
+        <div class="st-items">
+
+          <span class="st-item b-purple">RabbitMQ</span>
+          <span class="st-item b-purple">Apache NIFI</span>
+          <span class="st-item b-purple">N8N</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================================================
+FOOTER
+========================================================= -->
+
+<footer>
+  Mauricio Martins · Backend & Fullstack · São Paulo · 2026
+</footer>
+
+</body>
+</html>

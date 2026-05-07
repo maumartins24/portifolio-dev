@@ -1,1471 +1,788 @@
+# HTML Ajustado — Versão Refinada
+
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Mauricio Martins — Backend & Fullstack Developer</title>
-
-<meta name="description" content="Backend & Fullstack Developer especializado em Python, Node.js, APIs, automação, dados e arquitetura escalável. São Paulo, SP.">
-
+<title>Mauricio Martins — Backend & Fullstack Engineer</title>
+<meta name="description" content="Backend & Fullstack Engineer especializado em automação, pipelines de dados, APIs escaláveis e sistemas modernos.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
-/* =========================================================
-RESET
-========================================================= */
-
-*,
-*::before,
-*::after{
-  box-sizing:border-box;
+*{
   margin:0;
   padding:0;
+  box-sizing:border-box;
 }
-
-/* =========================================================
-ROOT
-========================================================= */
 
 :root{
+  --bg:#06070b;
+  --surface:#0d1017;
+  --surface-2:#131824;
+  --surface-3:#171d2b;
 
-  --bg:#07080d;
-  --bg2:#0c1018;
+  --border:rgba(255,255,255,0.08);
+  --border-strong:rgba(255,255,255,0.14);
 
-  --card:#11151e;
-  --card2:#171d28;
+  --text:#f3f7ff;
+  --muted:#8b97ad;
+  --muted-2:#647086;
 
-  --text:#eef2ff;
-  --sub:#9aa8c2;
-  --sub2:#6b7a94;
-
-  --border:rgba(255,255,255,.08);
-  --border2:rgba(255,255,255,.14);
-
-  /* BRAND */
   --purple:#7c3aed;
-  --purple-light:#a855f7;
+  --purple-soft:rgba(124,58,237,0.14);
 
-  --mint:#2df7c1;
+  --mint:#2df5c0;
+  --mint-soft:rgba(45,245,192,0.12);
 
-  --blue:#4f7cff;
+  --blue:#4ea1ff;
+  --blue-soft:rgba(78,161,255,0.12);
 
-  --pink:#ff4fd8;
+  --gradient:linear-gradient(135deg,#7c3aed 0%,#3b82f6 50%,#2df5c0 100%);
 
-  --purple-bg:rgba(124,58,237,.12);
-  --mint-bg:rgba(45,247,193,.12);
-  --blue-bg:rgba(79,124,255,.12);
-
-  --gradient:
-  linear-gradient(
-    135deg,
-    #7c3aed 0%,
-    #4f7cff 45%,
-    #2df7c1 100%
-  );
-
+  --shadow:0 10px 40px rgba(0,0,0,.45);
 }
-
-/* =========================================================
-GLOBAL
-========================================================= */
 
 html{
   scroll-behavior:smooth;
 }
 
 body{
-
-  font-family:'Inter',sans-serif;
-
   background:
-    radial-gradient(circle at top left, rgba(124,58,237,.16), transparent 32%),
-    radial-gradient(circle at top right, rgba(45,247,193,.10), transparent 28%),
-    radial-gradient(circle at bottom center, rgba(79,124,255,.12), transparent 35%),
-    var(--bg);
+  radial-gradient(circle at top left, rgba(124,58,237,.18), transparent 28%),
+  radial-gradient(circle at top right, rgba(45,245,192,.10), transparent 24%),
+  var(--bg);
 
   color:var(--text);
-
+  font-family:'Inter',sans-serif;
   overflow-x:hidden;
-
   line-height:1.7;
-
-  font-size:14px;
 }
 
 body::before{
-
   content:'';
-
   position:fixed;
   inset:0;
+  background-image:
+  linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
 
-  background:
-  linear-gradient(
-    90deg,
-    transparent,
-    rgba(124,58,237,.02),
-    transparent
-  );
-
+  background-size:40px 40px;
+  opacity:.22;
   pointer-events:none;
-
   z-index:-1;
 }
 
-img{
-  max-width:100%;
+.container{
+  width:min(1120px,92%);
+  margin:auto;
 }
-
-a{
-  color:inherit;
-}
-
-.w{
-  width:100%;
-  max-width:1120px;
-  margin:0 auto;
-  padding:0 1.5rem;
-}
-
-/* =========================================================
-NAV
-========================================================= */
 
 nav{
-
   position:fixed;
-
   top:0;
   left:0;
-  right:0;
+  width:100%;
+  z-index:999;
+  backdrop-filter:blur(14px);
+  background:rgba(6,7,11,.72);
+  border-bottom:1px solid var(--border);
+}
 
-  z-index:100;
-
-  height:64px;
-
+.nav-wrap{
+  height:74px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-
-  padding:0 2rem;
-
-  background:rgba(7,8,13,.82);
-
-  backdrop-filter:blur(18px);
-
-  border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 .logo{
-
   font-family:'IBM Plex Mono',monospace;
-
   font-size:14px;
-
   color:white;
-
-  letter-spacing:.05em;
+  letter-spacing:.04em;
 }
 
-.logo b{
+.logo span{
   color:var(--mint);
 }
 
 .nav-links{
-
   display:flex;
   align-items:center;
-  gap:2rem;
+  gap:28px;
 }
 
 .nav-links a{
-
-  font-size:12px;
-
-  color:var(--sub);
-
+  color:var(--muted);
   text-decoration:none;
-
-  transition:.2s;
-
+  font-size:13px;
   font-family:'IBM Plex Mono',monospace;
-
-  letter-spacing:.05em;
+  transition:.2s;
 }
 
 .nav-links a:hover{
-  color:var(--mint);
+  color:white;
 }
 
-.dot-green{
-
-  display:inline-flex;
+.status{
+  display:flex;
   align-items:center;
-  gap:6px;
-
+  gap:8px;
   color:var(--mint);
-
+  font-size:12px;
   font-family:'IBM Plex Mono',monospace;
-  font-size:11px;
 }
 
-.dot-green::before{
-
+.status::before{
   content:'';
-
-  width:7px;
-  height:7px;
-
+  width:8px;
+  height:8px;
   border-radius:50%;
-
   background:var(--mint);
-
-  box-shadow:
-  0 0 12px var(--mint),
-  0 0 22px var(--mint);
-
-  animation:blink 2.5s infinite;
+  box-shadow:0 0 12px var(--mint);
 }
 
-@keyframes blink{
-
-  0%,100%{
-    opacity:1;
-  }
-
-  50%{
-    opacity:.35;
-  }
-}
-
-/* =========================================================
-HERO
-========================================================= */
-
-#hero{
-
-  position:relative;
-
+.hero{
   padding:150px 0 90px;
-
-  overflow:hidden;
-}
-
-#hero::before{
-
-  content:'';
-
-  position:absolute;
-
-  width:700px;
-  height:700px;
-
-  top:-320px;
-  right:-220px;
-
-  background:
-  radial-gradient(circle, rgba(124,58,237,.20), transparent 70%);
-
-  z-index:-1;
 }
 
 .hero-grid{
-
   display:grid;
-
-  grid-template-columns:1fr 320px;
-
-  gap:4rem;
-
+  grid-template-columns:1.4fr .8fr;
+  gap:60px;
   align-items:center;
 }
 
-.hero-top{
-
+.tags{
   display:flex;
-  flex-wrap:wrap;
   gap:10px;
-
-  margin-bottom:1.8rem;
+  flex-wrap:wrap;
+  margin-bottom:26px;
 }
 
-.badge{
-
-  padding:5px 10px;
-
+.tag{
+  padding:7px 14px;
   border-radius:999px;
-
-  border:1px solid transparent;
-
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.03);
+  font-size:11px;
+  color:var(--muted);
   font-family:'IBM Plex Mono',monospace;
-  font-size:10px;
-
-  letter-spacing:.06em;
 }
 
-.b-green{
-  background:var(--mint-bg);
+.tag.green{
+  background:var(--mint-soft);
   color:var(--mint);
-  border-color:rgba(45,247,193,.22);
+  border-color:rgba(45,245,192,.18);
 }
 
-.b-blue{
-  background:var(--blue-bg);
+.tag.blue{
+  background:var(--blue-soft);
   color:var(--blue);
-  border-color:rgba(79,124,255,.22);
-}
-
-.b-purple{
-  background:var(--purple-bg);
-  color:#c084fc;
-  border-color:rgba(124,58,237,.22);
-}
-
-.b-dim{
-  background:rgba(255,255,255,.04);
-  color:var(--sub);
-  border-color:var(--border);
 }
 
 h1{
-
-  font-size:clamp(3rem,7vw,5.5rem);
-
+  font-size:clamp(3rem,8vw,5.6rem);
   line-height:.95;
-
   letter-spacing:-.06em;
-
-  margin-bottom:1rem;
-
-  font-weight:800;
-
-  color:white;
+  margin-bottom:24px;
 }
 
-.hero-subtitle{
-
-  font-family:'IBM Plex Mono',monospace;
-
-  font-size:14px;
-
-  color:#b9c7e3;
-
-  margin-bottom:1.5rem;
-}
-
-.hero-subtitle b{
-  color:var(--mint);
-}
-
-.hero-bio{
-
-  max-width:720px;
-
-  color:var(--sub);
-
-  font-size:15px;
-
-  line-height:1.9;
-
-  margin-bottom:2rem;
-}
-
-.hero-bio strong{
-  color:white;
-  font-weight:600;
-}
-
-/* =========================================================
-BUTTONS
-========================================================= */
-
-.btns{
-
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-}
-
-.btn{
-
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-
-  min-height:50px;
-
-  padding:0 24px;
-
-  border-radius:14px;
-
-  text-decoration:none;
-
-  transition:.22s ease;
-
-  font-size:14px;
-  font-weight:600;
-
-  border:1px solid transparent;
-}
-
-.btn-p{
-
+.gradient{
   background:var(--gradient);
-
-  color:#06080f;
-
-  box-shadow:
-  0 10px 35px rgba(124,58,237,.35);
-}
-
-.btn-p:hover{
-
-  transform:translateY(-2px);
-
-  box-shadow:
-  0 18px 50px rgba(124,58,237,.45);
-}
-
-.btn-o{
-
-  background:rgba(255,255,255,.03);
-
-  border-color:rgba(255,255,255,.08);
-
-  color:white;
-}
-
-.btn-o:hover{
-
-  border-color:rgba(45,247,193,.35);
-
-  color:var(--mint);
-
-  background:rgba(45,247,193,.05);
-}
-
-/* =========================================================
-AVAILABLE CARD
-========================================================= */
-
-.avail-card{
-
-  position:relative;
-
-  background:
-  linear-gradient(
-    180deg,
-    rgba(255,255,255,.04),
-    rgba(255,255,255,.02)
-  );
-
-  border:1px solid rgba(255,255,255,.08);
-
-  border-radius:26px;
-
-  padding:1.6rem;
-
-  overflow:hidden;
-
-  backdrop-filter:blur(12px);
-}
-
-.avail-card::before{
-
-  content:'';
-
-  position:absolute;
-  inset:0;
-
-  background:
-  linear-gradient(
-    140deg,
-    rgba(124,58,237,.14),
-    transparent 35%,
-    rgba(45,247,193,.05)
-  );
-
-  pointer-events:none;
-}
-
-.ac-head{
-
-  display:flex;
-  align-items:center;
-  gap:8px;
-
-  margin-bottom:1rem;
-  padding-bottom:1rem;
-
-  border-bottom:1px solid rgba(255,255,255,.06);
-
-  color:var(--mint);
-
-  font-family:'IBM Plex Mono',monospace;
-  font-size:11px;
-
-  letter-spacing:.08em;
-
-  text-transform:uppercase;
-}
-
-.ac-head::before{
-
-  content:'';
-
-  width:8px;
-  height:8px;
-
-  border-radius:50%;
-
-  background:var(--mint);
-
-  box-shadow:
-  0 0 10px var(--mint),
-  0 0 18px var(--mint);
-}
-
-.ac-row{
-
-  display:flex;
-  justify-content:space-between;
-  gap:1rem;
-
-  margin-bottom:.85rem;
-}
-
-.ac-l{
-
-  color:var(--sub2);
-
-  font-size:11px;
-
-  font-family:'IBM Plex Mono',monospace;
-}
-
-.ac-v{
-
-  color:white;
-
-  font-size:13px;
-  font-weight:600;
-}
-
-.ac-v.g{
-  color:var(--mint);
-}
-
-/* =========================================================
-NUMBERS
-========================================================= */
-
-.numbers{
-
-  display:grid;
-
-  grid-template-columns:repeat(4,1fr);
-
-  gap:18px;
-
-  max-width:1120px;
-
-  margin:0 auto;
-
-  padding:0 1.5rem 3rem;
-}
-
-.num-item{
-
-  background:
-  linear-gradient(
-    180deg,
-    rgba(255,255,255,.04),
-    rgba(255,255,255,.02)
-  );
-
-  border:1px solid rgba(255,255,255,.08);
-
-  border-radius:20px;
-
-  padding:2rem 1rem;
-
-  text-align:center;
-
-  transition:.2s;
-}
-
-.num-item:hover{
-
-  transform:translateY(-4px);
-
-  border-color:rgba(124,58,237,.25);
-}
-
-.num-n{
-
-  font-size:2.2rem;
-
-  font-weight:800;
-
-  letter-spacing:-.06em;
-}
-
-.num-l{
-
-  margin-top:.6rem;
-
-  font-size:11px;
-
-  color:var(--sub);
-
-  line-height:1.5;
-
-  font-family:'IBM Plex Mono',monospace;
-}
-
-/* =========================================================
-SECTIONS
-========================================================= */
-
-section{
-  position:relative;
-}
-
-#stack,
-#projetos,
-#experiencia,
-#contato{
-  padding:5rem 0;
-}
-
-.sec-label{
-
-  font-family:'IBM Plex Mono',monospace;
-
-  font-size:10px;
-
-  color:var(--mint);
-
-  letter-spacing:.16em;
-
-  text-transform:uppercase;
-
-  margin-bottom:.5rem;
-}
-
-.sec-title{
-
-  font-size:2rem;
-
-  font-weight:800;
-
-  letter-spacing:-.04em;
-
-  margin-bottom:2rem;
-}
-
-/* =========================================================
-STACK
-========================================================= */
-
-.stack-table{
-
-  display:grid;
-
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-
-  gap:16px;
-}
-
-.st-row{
-
-  background:
-  linear-gradient(
-    180deg,
-    rgba(255,255,255,.04),
-    rgba(255,255,255,.02)
-  );
-
-  border:1px solid rgba(255,255,255,.08);
-
-  border-radius:20px;
-
-  padding:1.2rem;
-
-  transition:.2s;
-}
-
-.st-row:hover{
-
-  transform:translateY(-4px);
-
-  border-color:rgba(124,58,237,.22);
-}
-
-.st-cat{
-
-  font-family:'IBM Plex Mono',monospace;
-
-  font-size:10px;
-
-  color:var(--mint);
-
-  letter-spacing:.12em;
-
-  text-transform:uppercase;
-
-  margin-bottom:1rem;
-}
-
-.st-items{
-
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-}
-
-.st-item{
-
-  padding:5px 9px;
-
-  border-radius:999px;
-
-  font-family:'IBM Plex Mono',monospace;
-  font-size:11px;
-}
-
-/* =========================================================
-PROJECTS
-========================================================= */
-
-.proj-list{
-
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-}
-
-.proj{
-
-  background:
-  linear-gradient(
-    180deg,
-    rgba(255,255,255,.04),
-    rgba(255,255,255,.02)
-  );
-
-  border:1px solid rgba(255,255,255,.08);
-
-  border-radius:24px;
-
-  padding:2rem;
-
-  transition:.22s;
-}
-
-.proj:hover{
-
-  transform:translateY(-5px);
-
-  border-color:rgba(124,58,237,.25);
-
-  box-shadow:
-  0 20px 40px rgba(0,0,0,.25);
-}
-
-.proj-head{
-
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:1rem;
-  flex-wrap:wrap;
-}
-
-.proj-name-row{
-
-  display:flex;
-  align-items:center;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-.proj-name{
-
-  font-size:18px;
-
-  font-weight:700;
-}
-
-.proj-link{
-
-  color:var(--mint);
-
-  text-decoration:none;
-
-  font-family:'IBM Plex Mono',monospace;
-  font-size:11px;
-}
-
-.proj-what{
-
-  margin-top:1rem;
-
-  color:var(--sub);
-
-  line-height:1.9;
-}
-
-.proj-what strong{
-  color:white;
-}
-
-.proj-impact{
-
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-
-  margin-top:1rem;
-}
-
-.ic{
-
-  padding:5px 9px;
-
-  border-radius:999px;
-
-  background:var(--mint-bg);
-
-  border:1px solid rgba(45,247,193,.18);
-
-  color:var(--mint);
-
-  font-family:'IBM Plex Mono',monospace;
-  font-size:10px;
-}
-
-.proj-tech{
-
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-
-  margin-top:1rem;
-}
-
-.tc{
-
-  padding:5px 8px;
-
-  border-radius:999px;
-
-  background:rgba(255,255,255,.04);
-
-  border:1px solid rgba(255,255,255,.08);
-
-  color:#c0cae0;
-
-  font-family:'IBM Plex Mono',monospace;
-  font-size:10px;
-}
-
-/* =========================================================
-EXPERIENCE
-========================================================= */
-
-.exp{
-
-  padding:2rem 0;
-
-  border-bottom:1px solid rgba(255,255,255,.06);
-}
-
-.exp:last-child{
-  border-bottom:none;
-}
-
-.exp-hd{
-
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:1rem;
-  flex-wrap:wrap;
-}
-
-.exp-role{
-
-  font-size:18px;
-
-  font-weight:700;
-}
-
-.exp-co{
-
-  margin-top:.35rem;
-
-  color:var(--sub);
-}
-
-.exp-date{
-
-  padding:5px 10px;
-
-  border-radius:999px;
-
-  font-family:'IBM Plex Mono',monospace;
-  font-size:10px;
-}
-
-.ed-now{
-
-  background:var(--mint-bg);
-
-  border:1px solid rgba(45,247,193,.18);
-
-  color:var(--mint);
-}
-
-.ed-past{
-
-  background:rgba(255,255,255,.04);
-
-  border:1px solid rgba(255,255,255,.08);
-
-  color:var(--sub);
-}
-
-.exp-buls{
-  margin-top:1.2rem;
-}
-
-.bul{
-
-  display:flex;
-  gap:10px;
-
-  color:var(--sub);
-
-  margin-bottom:.8rem;
-}
-
-.bul::before{
-
-  content:'—';
-
-  color:var(--mint);
-}
-
-.bul strong{
-  color:white;
-}
-
-.exp-tags{
-
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-
-  margin-top:1rem;
-}
-
-.et{
-
-  padding:5px 8px;
-
-  border-radius:999px;
-
-  background:rgba(255,255,255,.04);
-
-  border:1px solid rgba(255,255,255,.08);
-
-  color:#c0cae0;
-
-  font-family:'IBM Plex Mono',monospace;
-  font-size:10px;
-}
-
-/* =========================================================
-CONTACT
-========================================================= */
-
-.contact-grid{
-
-  display:grid;
-
-  grid-template-columns:1fr 1fr;
-
-  gap:4rem;
-}
-
-.ct-title{
-
-  font-size:3rem;
-
-  line-height:1;
-
-  letter-spacing:-.06em;
-
-  margin-bottom:1rem;
-}
-
-.ct-title span{
-
-  background:var(--gradient);
-
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
-.ct-sub{
-
-  color:var(--sub);
-
-  line-height:1.9;
-}
-
-.ct-sub strong{
-  color:white;
-}
-
-.links{
-
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-
-.cl{
-
-  display:flex;
-  align-items:center;
-  gap:14px;
-
-  padding:14px 16px;
-
-  border-radius:18px;
-
-  background:
-  linear-gradient(
-    180deg,
-    rgba(255,255,255,.04),
-    rgba(255,255,255,.02)
-  );
-
-  border:1px solid rgba(255,255,255,.08);
-
-  text-decoration:none;
-
-  transition:.2s;
-}
-
-.cl:hover{
-
-  transform:translateX(6px);
-
-  border-color:rgba(45,247,193,.25);
-}
-
-.cl-ico{
-
-  width:42px;
-  height:42px;
-
-  border-radius:12px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
+.hero-sub{
+  color:var(--muted);
   font-family:'IBM Plex Mono',monospace;
-  font-size:11px;
-  font-weight:700;
+  margin-bottom:26px;
+  font-size:14px;
 }
 
-.ci-g{
-  background:var(--mint-bg);
+.hero-sub strong{
   color:var(--mint);
 }
 
-.ci-b{
-  background:var(--blue-bg);
-  color:var(--blue);
+.hero-text{
+  max-width:720px;
+  color:#b8c2d8;
+  font-size:17px;
+  margin-bottom:36px;
 }
 
-.ci-p{
-  background:var(--purple-bg);
-  color:#c084fc;
-}
-
-.cl-lbl{
-
-  color:var(--sub2);
-
-  font-family:'IBM Plex Mono',monospace;
-  font-size:10px;
-}
-
-.cl-val{
-
+.hero-text strong{
   color:white;
-
-  margin-top:2px;
 }
 
-/* =========================================================
-FOOTER
-========================================================= */
+.hero-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+}
 
-footer{
+.btn{
+  height:50px;
+  padding:0 24px;
+  border-radius:12px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  transition:.25s;
+  font-weight:600;
+}
 
-  padding:2rem;
+.btn-primary{
+  background:var(--gradient);
+  color:white;
+  box-shadow:0 10px 35px rgba(124,58,237,.35);
+}
 
-  text-align:center;
+.btn-primary:hover{
+  transform:translateY(-2px);
+}
 
-  border-top:1px solid rgba(255,255,255,.06);
+.btn-outline{
+  border:1px solid var(--border-strong);
+  color:#dbe5f5;
+  background:rgba(255,255,255,.02);
+}
 
-  color:var(--sub2);
+.btn-outline:hover{
+  border-color:rgba(255,255,255,.24);
+  background:rgba(255,255,255,.04);
+}
 
+.hero-card{
+  background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+  border:1px solid var(--border);
+  border-radius:28px;
+  padding:32px;
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-card::before{
+  content:'';
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  background:rgba(124,58,237,.18);
+  top:-90px;
+  right:-60px;
+  filter:blur(20px);
+}
+
+.card-title{
   font-family:'IBM Plex Mono',monospace;
   font-size:11px;
+  letter-spacing:.15em;
+  color:var(--mint);
+  margin-bottom:26px;
 }
 
-/* =========================================================
-RESPONSIVE
-========================================================= */
+.info-row{
+  display:flex;
+  justify-content:space-between;
+  padding:14px 0;
+  border-bottom:1px solid var(--border);
+}
 
-@media(max-width:920px){
+.info-row:last-child{
+  border:none;
+}
 
-  .hero-grid,
-  .contact-grid{
+.info-label{
+  color:var(--muted-2);
+  font-size:13px;
+}
+
+.info-value{
+  color:white;
+  font-weight:600;
+}
+
+.stats{
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+}
+
+.stat{
+  padding:38px 20px;
+  text-align:center;
+  background:rgba(255,255,255,.015);
+  border-right:1px solid var(--border);
+}
+
+.stat:last-child{
+  border:none;
+}
+
+.stat h3{
+  font-size:42px;
+  letter-spacing:-.06em;
+  margin-bottom:10px;
+}
+
+.stat p{
+  color:var(--muted);
+  font-size:13px;
+}
+
+section{
+  padding:100px 0;
+}
+
+.section-label{
+  color:var(--mint);
+  font-size:11px;
+  font-family:'IBM Plex Mono',monospace;
+  letter-spacing:.18em;
+  margin-bottom:18px;
+}
+
+.section-title{
+  font-size:48px;
+  letter-spacing:-.05em;
+  margin-bottom:18px;
+}
+
+.section-text{
+  color:var(--muted);
+  max-width:720px;
+  margin-bottom:50px;
+}
+
+.stack-grid,
+.projects-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:22px;
+}
+
+.card{
+  background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:28px;
+  transition:.25s;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(124,58,237,.34);
+}
+
+.card small{
+  display:block;
+  color:var(--muted);
+  font-family:'IBM Plex Mono',monospace;
+  margin-bottom:18px;
+}
+
+.card h3{
+  margin-bottom:18px;
+  font-size:22px;
+}
+
+.techs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.tech{
+  padding:7px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border);
+  font-size:12px;
+  color:#d8e2f3;
+}
+
+.project-card p{
+  color:#b8c2d8;
+  margin-bottom:22px;
+}
+
+.project-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:18px;
+  margin-bottom:22px;
+}
+
+.project-badge{
+  font-size:11px;
+  background:var(--purple-soft);
+  color:#b998ff;
+  padding:7px 12px;
+  border-radius:999px;
+  white-space:nowrap;
+}
+
+.timeline{
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+}
+
+.timeline-item{
+  border-left:1px solid var(--border);
+  padding-left:28px;
+  position:relative;
+}
+
+.timeline-item::before{
+  content:'';
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:var(--mint);
+  box-shadow:0 0 14px rgba(45,245,192,.6);
+  position:absolute;
+  left:-7px;
+  top:4px;
+}
+
+.timeline-item h3{
+  font-size:24px;
+  margin-bottom:6px;
+}
+
+.timeline-item span{
+  color:var(--muted);
+  display:block;
+  margin-bottom:18px;
+}
+
+.timeline-item p{
+  color:#b8c2d8;
+}
+
+.contact-box{
+  background:linear-gradient(180deg, rgba(124,58,237,.12), rgba(255,255,255,.02));
+  border:1px solid var(--border);
+  border-radius:32px;
+  padding:50px;
+  text-align:center;
+}
+
+.contact-box h2{
+  font-size:52px;
+  line-height:1;
+  letter-spacing:-.06em;
+  margin-bottom:24px;
+}
+
+.contact-box p{
+  color:#c4d0e4;
+  max-width:720px;
+  margin:0 auto 34px;
+}
+
+.contact-links{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:14px;
+}
+
+footer{
+  border-top:1px solid var(--border);
+  padding:30px 0;
+  text-align:center;
+  color:var(--muted-2);
+  font-size:13px;
+}
+
+@media(max-width:980px){
+  .hero-grid{
     grid-template-columns:1fr;
   }
 
-  .numbers{
+  .stats-grid{
     grid-template-columns:repeat(2,1fr);
-  }
-
-  h1{
-    font-size:3.6rem;
   }
 }
 
-@media(max-width:680px){
+@media(max-width:700px){
 
   nav{
-    padding:0 1rem;
-  }
-
-  .nav-links a{
     display:none;
   }
 
-  .numbers{
+  .hero{
+    padding-top:110px;
+  }
+
+  .stats-grid{
     grid-template-columns:1fr;
   }
 
-  .btn{
-    width:100%;
+  .section-title{
+    font-size:38px;
   }
 
-  .btns{
-    flex-direction:column;
+  .contact-box{
+    padding:36px 24px;
   }
 
-  h1{
-    font-size:2.8rem;
+  .contact-box h2{
+    font-size:40px;
   }
 
-  .ct-title{
-    font-size:2.2rem;
-  }
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- =========================================================
-NAV
-========================================================= -->
-
 <nav>
+  <div class="container nav-wrap">
+    <div class="logo">mauricio<span>.dev</span></div>
 
-  <div class="logo">
-    mauricio<b>.</b>dev
+    <div class="nav-links">
+      <a href="#stack">stack</a>
+      <a href="#projects">projetos</a>
+      <a href="#experience">experiência</a>
+      <a href="#contact">contato</a>
+      <div class="status">disponível</div>
+    </div>
   </div>
-
-  <div class="nav-links">
-    <a href="#stack">stack</a>
-    <a href="#projetos">projetos</a>
-    <a href="#experiencia">experiência</a>
-    <a href="#contato">contato</a>
-
-    <span class="dot-green">
-      disponível
-    </span>
-  </div>
-
 </nav>
 
-<!-- =========================================================
-HERO
-========================================================= -->
+<section class="hero">
+  <div class="container hero-grid">
 
-<section id="hero">
+    <div>
 
-  <div class="w">
-
-    <div class="hero-grid">
-
-      <div>
-
-        <div class="hero-top">
-
-          <span class="badge b-green">
-            Backend & Fullstack
-          </span>
-
-          <span class="badge b-blue">
-            Junior → Pleno
-          </span>
-
-          <span class="badge b-dim">
-            São Paulo, SP
-          </span>
-
-        </div>
-
-        <h1>
-          Mauricio<br>
-          Martins
-        </h1>
-
-        <p class="hero-subtitle">
-          Python · Node.js · APIs · Dados · <b>Automação</b>
-        </p>
-
-        <p class="hero-bio">
-
-          Desenvolvedor com experiência em
-          <strong>backend escalável</strong>,
-          <strong>pipelines de dados</strong>,
-          <strong>arquitetura event-driven</strong>
-          e automações em produção.
-
-          Atualmente construo sistemas que processam
-          <strong>1M+ registros por dia</strong>,
-          atuando com infraestrutura, APIs, ETL,
-          dashboards e mensageria.
-
-          Co-fundador da M&T Tecnologia Jurídica.
-
-        </p>
-
-        <div class="btns">
-
-          <a href="#contato" class="btn btn-p">
-            Entrar em contato
-          </a>
-
-          <a href="https://github.com/maumartins24"
-             target="_blank"
-             class="btn btn-o">
-            GitHub
-          </a>
-
-          <a href="https://linkedin.com/in/mauricio-martins-303596247/"
-             target="_blank"
-             class="btn btn-o">
-            LinkedIn
-          </a>
-
-        </div>
-
+      <div class="tags">
+        <div class="tag green">Backend & Fullstack</div>
+        <div class="tag blue">Python · Node.js</div>
+        <div class="tag">São Paulo, SP</div>
       </div>
 
-      <!-- CARD -->
+      <h1>
+        Engenharia de software
+        <span class="gradient">orientada a impacto.</span>
+      </h1>
 
-      <div class="avail-card">
+      <div class="hero-sub">
+        APIs · Automação · Dados · ETL · Microsserviços · <strong>Event Driven</strong>
+      </div>
 
-        <div class="ac-head">
-          disponível agora
-        </div>
+      <p class="hero-text">
+        Sou <strong>Mauricio Martins</strong>, desenvolvedor Backend & Fullstack.
+        Trabalho construindo pipelines de dados, automações críticas,
+        integrações escaláveis e sistemas modernos focados em performance,
+        arquitetura e resultado de negócio.
+      </p>
 
-        <div class="ac-row">
-          <span class="ac-l">nível</span>
-          <span class="ac-v">Junior / Pleno</span>
-        </div>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn btn-primary">Entrar em contato</a>
+        <a href="https://github.com/maumartins24" target="_blank" class="btn btn-outline">GitHub</a>
+        <a href="https://linkedin.com/in/mauricio-martins-303596247/" target="_blank" class="btn btn-outline">LinkedIn</a>
+      </div>
 
-        <div class="ac-row">
-          <span class="ac-l">pretensão PJ</span>
-          <span class="ac-v g">R$ 4–6k</span>
-        </div>
+    </div>
 
-        <div class="ac-row">
-          <span class="ac-l">regime</span>
-          <span class="ac-v">Híbrido / Remoto</span>
-        </div>
+    <div class="hero-card">
 
-        <div class="ac-row">
-          <span class="ac-l">inglês</span>
-          <span class="ac-v">Avançado (B2)</span>
-        </div>
+      <div class="card-title">PROFISSIONAL STATUS</div>
 
-        <div class="ac-row">
-          <span class="ac-l">stack</span>
-          <span class="ac-v">Python · Node</span>
-        </div>
+      <div class="info-row">
+        <div class="info-label">Nível</div>
+        <div class="info-value">Junior → Pleno</div>
+      </div>
 
+      <div class="info-row">
+        <div class="info-label">Foco</div>
+        <div class="info-value">Backend & Dados</div>
+      </div>
+
+      <div class="info-row">
+        <div class="info-label">Regime</div>
+        <div class="info-value">Remoto / Híbrido</div>
+      </div>
+
+      <div class="info-row">
+        <div class="info-label">Pretensão</div>
+        <div class="info-value">R$ 4k — 6k</div>
+      </div>
+
+      <div class="info-row">
+        <div class="info-label">Idioma</div>
+        <div class="info-value">Inglês B2</div>
       </div>
 
     </div>
 
   </div>
-
 </section>
 
-<!-- =========================================================
-NUMBERS
-========================================================= -->
+<section class="stats">
+  <div class="stats-grid">
 
-<div class="numbers">
-
-  <div class="num-item">
-    <div class="num-n" style="color:var(--mint)">
-      1M+
+    <div class="stat">
+      <h3 class="gradient">1M+</h3>
+      <p>registros processados por dia</p>
     </div>
 
-    <div class="num-l">
-      registros/dia<br>
-      em produção
+    <div class="stat">
+      <h3 class="gradient">4</h3>
+      <p>relatórios automatizados</p>
     </div>
+
+    <div class="stat">
+      <h3 class="gradient">5</h3>
+      <p>dashboards em produção</p>
+    </div>
+
+    <div class="stat">
+      <h3 class="gradient">2+</h3>
+      <p>anos em ambiente produtivo</p>
+    </div>
+
   </div>
-
-  <div class="num-item">
-    <div class="num-n" style="color:var(--blue)">
-      4
-    </div>
-
-    <div class="num-l">
-      relatórios<br>
-      automatizados
-    </div>
-  </div>
-
-  <div class="num-item">
-    <div class="num-n" style="color:#c084fc">
-      5
-    </div>
-
-    <div class="num-l">
-      dashboards<br>
-      ativos
-    </div>
-  </div>
-
-  <div class="num-item">
-    <div class="num-n" style="color:#fff">
-      2+
-    </div>
-
-    <div class="num-l">
-      anos em<br>
-      produção
-    </div>
-  </div>
-
-</div>
-
-<!-- =========================================================
-STACK
-========================================================= -->
+</section>
 
 <section id="stack">
+  <div class="container">
 
-  <div class="w">
+    <div class="section-label">STACK</div>
+    <h2 class="section-title">Tecnologias principais</h2>
+    <p class="section-text">
+      Stack voltada para backend moderno, processamento de dados,
+      automação de fluxos, mensageria e infraestrutura.
+    </p>
 
-    <div class="sec-label">
-      stack técnica
+    <div class="stack-grid">
+
+      <div class="card">
+        <small>BACKEND</small>
+        <h3>APIs & Microsserviços</h3>
+
+        <div class="techs">
+          <div class="tech">Node.js</div>
+          <div class="tech">NestJS</div>
+          <div class="tech">FastAPI</div>
+          <div class="tech">REST</div>
+          <div class="tech">JWT</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <small>DADOS</small>
+        <h3>ETL & Analytics</h3>
+
+        <div class="techs">
+          <div class="tech">PostgreSQL</div>
+          <div class="tech">BigQuery</div>
+          <div class="tech">Looker Studio</div>
+          <div class="tech">MySQL</div>
+          <div class="tech">ETL</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <small>AUTOMAÇÃO</small>
+        <h3>Arquitetura orientada a eventos</h3>
+
+        <div class="techs">
+          <div class="tech">RabbitMQ</div>
+          <div class="tech">N8N</div>
+          <div class="tech">Apache NiFi</div>
+          <div class="tech">Event Driven</div>
+        </div>
+      </div>
+
     </div>
 
-    <div class="sec-title">
-      Tecnologias que utilizo
-    </div>
+  </div>
+</section>
 
-    <div class="stack-table">
+<section id="projects">
+  <div class="container">
 
-      <div class="st-row">
+    <div class="section-label">PROJETOS</div>
+    <h2 class="section-title">Projetos em destaque</h2>
 
-        <div class="st-cat">
-          Linguagens
+    <div class="projects-grid">
+
+      <div class="card project-card">
+
+        <div class="project-top">
+          <h3>Pipeline Receita Federal</h3>
+          <div class="project-badge">1M+ registros/dia</div>
         </div>
 
-        <div class="st-items">
+        <p>
+          Sistema de ETL e processamento massivo de dados com integração
+          BigQuery, normalização por CNPJ e automações em produção.
+        </p>
 
-          <span class="st-item b-green">Python</span>
-          <span class="st-item b-blue">TypeScript</span>
-          <span class="st-item b-blue">JavaScript</span>
-          <span class="st-item b-dim">Dart</span>
-          <span class="st-item b-dim">C++</span>
-
-        </div>
-
-      </div>
-
-      <div class="st-row">
-
-        <div class="st-cat">
-          Backend
-        </div>
-
-        <div class="st-items">
-
-          <span class="st-item b-green">Node.js</span>
-          <span class="st-item b-green">NestJS</span>
-          <span class="st-item b-green">FastAPI</span>
-          <span class="st-item b-green">REST APIs</span>
-
+        <div class="techs">
+          <div class="tech">Python</div>
+          <div class="tech">BigQuery</div>
+          <div class="tech">Docker</div>
+          <div class="tech">PostgreSQL</div>
         </div>
 
       </div>
 
-      <div class="st-row">
+      <div class="card project-card">
 
-        <div class="st-cat">
-          Dados & BI
+        <div class="project-top">
+          <h3>Arquitetura Event Driven</h3>
+          <div class="project-badge">Microsserviços</div>
         </div>
 
-        <div class="st-items">
+        <p>
+          Fluxos automatizados com RabbitMQ, Apache NiFi e N8N para gestão
+          de agentes de IA e integrações escaláveis.
+        </p>
 
-          <span class="st-item b-blue">PostgreSQL</span>
-          <span class="st-item b-blue">BigQuery</span>
-          <span class="st-item b-blue">ETL</span>
-          <span class="st-item b-blue">Looker Studio</span>
-
+        <div class="techs">
+          <div class="tech">RabbitMQ</div>
+          <div class="tech">N8N</div>
+          <div class="tech">Node.js</div>
+          <div class="tech">Microsserviços</div>
         </div>
 
       </div>
 
-      <div class="st-row">
+      <div class="card project-card">
 
-        <div class="st-cat">
-          Mensageria
+        <div class="project-top">
+          <h3>M&T Tecnologia Jurídica</h3>
+          <div class="project-badge">Empresa própria</div>
         </div>
 
-        <div class="st-items">
+        <p>
+          Landing pages jurídicas de alta conversão com foco em SEO,
+          performance, branding e experiência premium.
+        </p>
 
-          <span class="st-item b-purple">RabbitMQ</span>
-          <span class="st-item b-purple">Apache NIFI</span>
-          <span class="st-item b-purple">N8N</span>
-
+        <div class="techs">
+          <div class="tech">Vue.js</div>
+          <div class="tech">SSG</div>
+          <div class="tech">SEO</div>
+          <div class="tech">Vercel</div>
         </div>
 
       </div>
@@ -1473,16 +790,106 @@ STACK
     </div>
 
   </div>
-
 </section>
 
-<!-- =========================================================
-FOOTER
-========================================================= -->
+<section id="experience">
+  <div class="container">
+
+    <div class="section-label">EXPERIÊNCIA</div>
+    <h2 class="section-title">Experiência profissional</h2>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <h3>Ativa.AI — Backend & Fullstack</h3>
+        <span>2024 — Atual</span>
+
+        <p>
+          Desenvolvimento de pipelines de dados, automações internas,
+          arquitetura event-driven, dashboards e infraestrutura.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <h3>M&T Tecnologia Jurídica</h3>
+        <span>2025 — Atual</span>
+
+        <p>
+          Co-fundador e responsável técnico pela arquitetura,
+          performance, SEO e desenvolvimento das aplicações.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <h3>MelloAIT</h3>
+        <span>2025</span>
+
+        <p>
+          Desenvolvimento frontend em Vue.js e suporte técnico em sistemas.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+
+    <div class="contact-box">
+
+      <div class="section-label">CONTATO</div>
+
+      <h2>
+        Vamos construir
+        algo forte.
+      </h2>
+
+      <p>
+        Aberto para oportunidades Backend, Fullstack,
+        automação, dados e sistemas escaláveis.
+      </p>
+
+      <div class="contact-links">
+
+        <a href="mailto:mauriciob.martins@hotmail.com" class="btn btn-primary">
+          Email
+        </a>
+
+        <a href="https://linkedin.com/in/mauricio-martins-303596247/" target="_blank" class="btn btn-outline">
+          LinkedIn
+        </a>
+
+        <a href="https://github.com/maumartins24" target="_blank" class="btn btn-outline">
+          GitHub
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
 
 <footer>
-  Mauricio Martins · Backend & Fullstack · São Paulo · 2026
+  Mauricio Martins · Backend & Fullstack Engineer · 2026
 </footer>
 
 </body>
 </html>
+```
+
+## Principais melhorias aplicadas
+
+* Visual mais premium e tecnológico inspirado na identidade da M&T.
+* Fundo com glow neon + grid futurista.
+* Hero muito mais forte visualmente.
+* Tipografia mais moderna e agressiva.
+* Cards refinados com glassmorphism leve.
+* Gradiente neon roxo/azul/mint.
+* Hierarquia visual mais clara.
+* Espaçamentos mais profissionais.
+* Responsividade melhorada.
+* Estrutura mais preparada para recrutadores.
+* Visual mais próximo de portfólios internacionais de engenharia.
